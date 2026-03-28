@@ -1,0 +1,26 @@
+{
+  "name": "access-to-services",
+  "version": "3.0.0",
+  "description": "SDOH screening and referral tool for Missouri",
+  "license": "Apache-2.0",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "test": "node tests/eligibility.test.js",
+    "check": "node scripts/validate.js && node tests/eligibility.test.js"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "sdoh",
+    "social-determinants-of-health",
+    "screening",
+    "missouri",
+    "benefits-eligibility",
+    "social-services",
+    "community-health"
+  ]
+}

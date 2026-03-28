@@ -1,0 +1,283 @@
+/**
+ * Internationalization strings for the SDOH Intake & Screening Tool.
+ *
+ * To add a new language:
+ * 1. Add a new key to the `strings` object (e.g., "fr" for French)
+ * 2. Copy the "en" object and translate all values
+ * 3. Add the language to the LANGUAGES array
+ */
+
+export const LANGUAGES = [
+  { code: "en", label: "English" },
+  { code: "es", label: "Español" },
+];
+
+export const strings = {
+  en: {
+    // App header
+    appTitle: "Access to Services",
+    appSubtitle: "SDOH Intake & Screening Tool",
+
+    // Step labels
+    stepIntake: "Client Intake",
+    stepScreening: "SDOH Screening",
+    stepResults: "Results & Referrals",
+
+    // Navigation
+    back: "Back",
+    beginScreening: "Begin Screening",
+    viewResults: "View Results",
+
+    // Intake form
+    clientInfo: "Client Information",
+    clientId: "Client ID",
+    clientIdPlaceholder: "Internal ID (no PII)",
+    forWhom: "Who is this for?",
+    forWhomSelf: "Self",
+    forWhomChild: "Child",
+    forWhomFamily: "Family member",
+    forWhomClient: "My client",
+    state: "State",
+    county: "County",
+    countyPlaceholder: "e.g., St. Louis",
+    urgency: "Urgency",
+    urgencyCrisis: "Crisis / Immediate",
+    urgencyWeek: "This week",
+    urgencyStandard: "Planning ahead",
+
+    // Household
+    household: "Household",
+    householdSize: "Household Size",
+    monthlyIncome: "Monthly Income ($)",
+    monthlyIncomePlaceholder: "Gross monthly",
+    fplLabel: "of Federal Poverty Level",
+    medicaidLikely: "Likely Medicaid eligible",
+    snapLikely: "Likely SNAP eligible",
+    employment: "Employment",
+    employed: "Employed",
+    unemployed: "Unemployed",
+    underemployed: "Underemployed",
+    retired: "Retired",
+    unableToWork: "Unable to work",
+    student: "Student",
+    housingStatus: "Housing Status",
+    housingStable: "Stable",
+    housingAtRisk: "At risk",
+    housingShelter: "In shelter",
+    housingUnsheltered: "Unsheltered",
+    housingTransitional: "Transitional",
+    housingDoubledUp: "Doubled up",
+
+    // Special circumstances
+    specialCircumstances: "Special Circumstances",
+    hasChildren: "Has children under 18",
+    pregnant: "Pregnant",
+    veteran: "Veteran",
+    hasDisability: "Has a disability",
+    ageSixtyPlus: "Age 60+",
+    childrenAges: "Children's ages (comma-separated)",
+    childrenAgesPlaceholder: "e.g., 3, 7, 14",
+
+    // Screening
+    screeningInstructions: "For each domain, ask the screening question and record the response. Screen at least 8 domains to proceed.",
+    crisisFlaggedIntake: "Crisis flagged at intake.",
+    crisisAddressSafety: "Address immediate safety before completing screening.",
+    crisisNumbers: "988 (crisis) · 1-800-799-7233 (DV) · 911 (emergency)",
+    noConcern: "No concern",
+    someConcern: "Some concern",
+    urgentCrisis: "Urgent / Crisis",
+    domainsScreened: "domains screened",
+    needMore: "need {n} more to proceed",
+
+    // Screening domain questions
+    "q.food": "Have you worried about running out of food in the past 30 days?",
+    "q.housing": "Are you worried about losing your housing or do you need a place to stay?",
+    "q.safety": "Do you feel physically and emotionally safe where you live?",
+    "q.transportation": "Can you reliably get to appointments and services?",
+    "q.utilities": "Have you had trouble paying utility bills in the past 12 months?",
+    "q.financial": "Are you having trouble paying for basic needs like rent, food, or medicine?",
+    "q.employment": "Do you need help finding a job or a better job?",
+    "q.education": "Do you or your children need help with school, training, or GED?",
+    "q.healthcare": "Do you have health insurance and access to a doctor?",
+    "q.mental_health": "Have you been feeling down, depressed, hopeless, or overwhelmed?",
+    "q.substance_use": "Do you have concerns about alcohol or drug use (yours or a household member's)?",
+    "q.social_support": "Do you have people you can count on for help and support?",
+    "q.childcare": "Do you have reliable, affordable child care?",
+    "q.legal": "Do you have legal issues that need attention (custody, eviction, record, immigration)?",
+
+    // Domain labels
+    "d.food": "Food Security",
+    "d.housing": "Housing",
+    "d.safety": "Safety",
+    "d.transportation": "Transportation",
+    "d.utilities": "Utilities",
+    "d.financial": "Financial Strain",
+    "d.employment": "Employment",
+    "d.education": "Education",
+    "d.healthcare": "Healthcare Access",
+    "d.mental_health": "Mental Health",
+    "d.substance_use": "Substance Use",
+    "d.social_support": "Social Support",
+    "d.childcare": "Child Care",
+    "d.legal": "Legal Issues",
+
+    // Results
+    compositeScore: "Composite Score",
+    crisisDomains: "Crisis Domains",
+    concernDomains: "Concern Domains",
+    fpl: "FPL",
+    crisisIdentified: "Crisis Domains Identified",
+    immediateAction: "immediate action needed",
+    dvHotline: "DV Hotline: 1-800-799-7233 · Crisis: 988 · Emergency: 911",
+    screeningResults: "Screening Results",
+    notScreened: "Not screened",
+    potentialBenefits: "Potential Benefits",
+    programs: "programs",
+    educationalOnly: "Educational screening only — not an eligibility determination",
+    program: "Program",
+    howToApply: "How to Apply",
+    notes: "Notes",
+    nextSteps: "Next Steps",
+    copyReport: "Copy Report",
+    sendToChat: "Send to Chat for Referrals",
+    startNew: "Start New Screening",
+    reportCopied: "Report Copied",
+    closeDialog: "Close dialog",
+    sessionRestored: "Previous session restored.",
+    language: "Language",
+  },
+
+  es: {
+    appTitle: "Acceso a Servicios",
+    appSubtitle: "Herramienta de Evaluación SDOH",
+
+    stepIntake: "Información del Cliente",
+    stepScreening: "Evaluación SDOH",
+    stepResults: "Resultados y Referencias",
+
+    back: "Atrás",
+    beginScreening: "Comenzar Evaluación",
+    viewResults: "Ver Resultados",
+
+    clientInfo: "Información del Cliente",
+    clientId: "ID del Cliente",
+    clientIdPlaceholder: "ID interno (sin información personal)",
+    forWhom: "¿Para quién es?",
+    forWhomSelf: "Para mí",
+    forWhomChild: "Hijo/a",
+    forWhomFamily: "Familiar",
+    forWhomClient: "Mi cliente",
+    state: "Estado",
+    county: "Condado",
+    countyPlaceholder: "ej., St. Louis",
+    urgency: "Urgencia",
+    urgencyCrisis: "Crisis / Inmediato",
+    urgencyWeek: "Esta semana",
+    urgencyStandard: "Planificación",
+
+    household: "Hogar",
+    householdSize: "Tamaño del Hogar",
+    monthlyIncome: "Ingreso Mensual ($)",
+    monthlyIncomePlaceholder: "Ingreso bruto mensual",
+    fplLabel: "del Nivel Federal de Pobreza",
+    medicaidLikely: "Probablemente elegible para Medicaid",
+    snapLikely: "Probablemente elegible para SNAP",
+    employment: "Empleo",
+    employed: "Empleado/a",
+    unemployed: "Desempleado/a",
+    underemployed: "Subempleado/a",
+    retired: "Jubilado/a",
+    unableToWork: "No puede trabajar",
+    student: "Estudiante",
+    housingStatus: "Estado de Vivienda",
+    housingStable: "Estable",
+    housingAtRisk: "En riesgo",
+    housingShelter: "En refugio",
+    housingUnsheltered: "Sin techo",
+    housingTransitional: "Transicional",
+    housingDoubledUp: "Compartiendo vivienda",
+
+    specialCircumstances: "Circunstancias Especiales",
+    hasChildren: "Tiene hijos menores de 18",
+    pregnant: "Embarazada",
+    veteran: "Veterano/a",
+    hasDisability: "Tiene una discapacidad",
+    ageSixtyPlus: "60+ años",
+    childrenAges: "Edades de los hijos (separadas por comas)",
+    childrenAgesPlaceholder: "ej., 3, 7, 14",
+
+    screeningInstructions: "Para cada área, haga la pregunta de evaluación y registre la respuesta. Evalúe al menos 8 áreas para continuar.",
+    crisisFlaggedIntake: "Crisis detectada en la admisión.",
+    crisisAddressSafety: "Atienda la seguridad inmediata antes de completar la evaluación.",
+    crisisNumbers: "988 (crisis) · 1-800-799-7233 (violencia doméstica) · 911 (emergencia)",
+    noConcern: "Sin preocupación",
+    someConcern: "Alguna preocupación",
+    urgentCrisis: "Urgente / Crisis",
+    domainsScreened: "áreas evaluadas",
+    needMore: "necesita {n} más para continuar",
+
+    "q.food": "¿Le ha preocupado quedarse sin comida en los últimos 30 días?",
+    "q.housing": "¿Le preocupa perder su vivienda o necesita un lugar donde quedarse?",
+    "q.safety": "¿Se siente física y emocionalmente seguro/a donde vive?",
+    "q.transportation": "¿Puede llegar de manera confiable a sus citas y servicios?",
+    "q.utilities": "¿Ha tenido problemas para pagar los servicios públicos en los últimos 12 meses?",
+    "q.financial": "¿Tiene problemas para pagar necesidades básicas como renta, comida o medicinas?",
+    "q.employment": "¿Necesita ayuda para encontrar un trabajo o un mejor trabajo?",
+    "q.education": "¿Usted o sus hijos necesitan ayuda con la escuela, capacitación o GED?",
+    "q.healthcare": "¿Tiene seguro médico y acceso a un doctor?",
+    "q.mental_health": "¿Se ha sentido triste, deprimido/a, sin esperanza o abrumado/a?",
+    "q.substance_use": "¿Tiene preocupaciones sobre el uso de alcohol o drogas (suyo o de un miembro del hogar)?",
+    "q.social_support": "¿Tiene personas con las que puede contar para ayuda y apoyo?",
+    "q.childcare": "¿Tiene cuidado infantil confiable y económico?",
+    "q.legal": "¿Tiene asuntos legales que necesitan atención (custodia, desalojo, antecedentes, inmigración)?",
+
+    "d.food": "Seguridad Alimentaria",
+    "d.housing": "Vivienda",
+    "d.safety": "Seguridad",
+    "d.transportation": "Transporte",
+    "d.utilities": "Servicios Públicos",
+    "d.financial": "Dificultad Financiera",
+    "d.employment": "Empleo",
+    "d.education": "Educación",
+    "d.healthcare": "Acceso a Salud",
+    "d.mental_health": "Salud Mental",
+    "d.substance_use": "Uso de Sustancias",
+    "d.social_support": "Apoyo Social",
+    "d.childcare": "Cuidado Infantil",
+    "d.legal": "Asuntos Legales",
+
+    compositeScore: "Puntuación Total",
+    crisisDomains: "Áreas de Crisis",
+    concernDomains: "Áreas de Preocupación",
+    fpl: "NFP",
+    crisisIdentified: "Áreas de Crisis Identificadas",
+    immediateAction: "acción inmediata necesaria",
+    dvHotline: "Violencia doméstica: 1-800-799-7233 · Crisis: 988 · Emergencia: 911",
+    screeningResults: "Resultados de Evaluación",
+    notScreened: "No evaluado",
+    potentialBenefits: "Beneficios Potenciales",
+    programs: "programas",
+    educationalOnly: "Evaluación educativa solamente — no es una determinación de elegibilidad",
+    program: "Programa",
+    howToApply: "Cómo Aplicar",
+    notes: "Notas",
+    nextSteps: "Próximos Pasos",
+    copyReport: "Copiar Reporte",
+    sendToChat: "Enviar al Chat para Referencias",
+    startNew: "Nueva Evaluación",
+    reportCopied: "Reporte Copiado",
+    closeDialog: "Cerrar diálogo",
+    sessionRestored: "Sesión anterior restaurada.",
+    language: "Idioma",
+  },
+};
+
+export function t(lang, key, params) {
+  let str = strings[lang]?.[key] || strings.en[key] || key;
+  if (params) {
+    for (const [k, v] of Object.entries(params)) {
+      str = str.replace(`{${k}}`, v);
+    }
+  }
+  return str;
+}
