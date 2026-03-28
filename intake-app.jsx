@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 const DOMAINS = [
   { id: "food", label: "Food Security", q: "Have you worried about running out of food in the past 30 days?" },
@@ -77,7 +77,6 @@ export default function SDOHIntakeApp() {
     if (p.pop === "school_age" && !intake.hasChildren) return false;
     if (p.pop === "pregnant_children_under5" && !intake.isPregnant && !intake.hasChildren) return false;
     if (p.pop === "disabled" && !intake.hasDisability) return false;
-    if (p.pop === "adults" && intake.isSenior) return false;
     return true;
   });
 
@@ -144,7 +143,13 @@ export default function SDOHIntakeApp() {
 
   const handleSendToChat = () => {
     const report = generateReport();
-    sendPrompt(`Here are the SDOH screening results for my client. Generate referrals for the flagged domains and build a service plan.\n\n${report}`);
+    if (typeof sendPrompt === "function") {
+      sendPrompt(`Here are the SDOH screening results for my client. Generate referrals for the flagged domains and build a service plan.\n\n${report}`);
+    } else {
+      setCopyContent(report);
+      setShowCopyModal(true);
+      navigator.clipboard?.writeText(report);
+    }
   };
 
   const canProceed = step === 0

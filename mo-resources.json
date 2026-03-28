@@ -9,7 +9,7 @@
     {
       "id": "mo-211",
       "name": "Missouri 211",
-      "domain": ["all"],
+      "domain": ["food", "housing", "mental_health", "substance_use", "healthcare", "employment", "legal", "transportation", "crisis", "financial"],
       "type": "hotline",
       "phone": "211",
       "phone_alt": "1-800-427-4626",
@@ -41,7 +41,7 @@
       "phone": "1-800-392-0210",
       "hours": "24/7",
       "coverage": "statewide",
-      "population": ["adults", "seniors"],
+      "population": ["all"],
       "cost": "free",
       "description": "Report suspected abuse, neglect, or exploitation of vulnerable adults.",
       "verified": "2026-03-28"
@@ -247,7 +247,7 @@
     {
       "id": "mo-fsd",
       "name": "Missouri Family Support Division (FSD)",
-      "domain": ["food", "healthcare", "financial", "childcare"],
+      "domain": ["food", "healthcare", "financial", "children"],
       "type": "government",
       "phone": "1-855-373-4636",
       "website": "mydss.mo.gov",

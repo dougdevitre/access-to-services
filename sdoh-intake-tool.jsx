@@ -18,17 +18,18 @@ const DOMAINS = [
 ];
 
 const PROGRAMS = [
-  { name: "SNAP", income: 130, pop: "all", apply: "mydss.mo.gov or local FSD office" },
-  { name: "WIC", income: 185, pop: "pregnant_children_under5", apply: "Local WIC clinic (signupwic.com)" },
-  { name: "Medicaid (Adult)", income: 138, pop: "adults", apply: "mydss.mo.gov" },
-  { name: "Medicaid (Children)", income: 300, pop: "children", apply: "mydss.mo.gov" },
-  { name: "TANF", income: 50, pop: "families_with_children", apply: "mydss.mo.gov or local FSD office" },
-  { name: "Child Care Subsidy", income: 185, pop: "families_with_children", apply: "mydss.mo.gov" },
-  { name: "LIHEAP", income: 150, pop: "all", apply: "Local Community Action Agency" },
-  { name: "School Meals (Free)", income: 130, pop: "school_age", apply: "Through the school" },
-  { name: "Head Start", income: 100, pop: "children_under5", apply: "eclkc.ohs.acf.hhs.gov" },
-  { name: "Section 8", income: 50, pop: "all", apply: "Local PHA", note: "Waitlist" },
-  { name: "SSI", income: 0, pop: "disabled", apply: "SSA 1-800-772-1213", note: "Disability required" },
+  { name: "SNAP", income: 130, pop: "all", domain: "food", apply: "mydss.mo.gov or local FSD office" },
+  { name: "WIC", income: 185, pop: "pregnant_children_under5", domain: "food", apply: "Local WIC clinic (signupwic.com)" },
+  { name: "Medicaid (Adult)", income: 138, pop: "adults", domain: "healthcare", apply: "mydss.mo.gov" },
+  { name: "Medicaid (Children)", income: 300, pop: "children", domain: "healthcare", apply: "mydss.mo.gov" },
+  { name: "TANF", income: 50, pop: "families_with_children", domain: "financial", apply: "mydss.mo.gov or local FSD office" },
+  { name: "Child Care Subsidy", income: 185, pop: "families_with_children", domain: "childcare", apply: "mydss.mo.gov" },
+  { name: "LIHEAP", income: 150, pop: "all", domain: "utilities", apply: "Local Community Action Agency" },
+  { name: "School Meals (Free)", income: 130, pop: "school_age", domain: "food", apply: "Through the school" },
+  { name: "School Meals (Reduced)", income: 185, pop: "school_age", domain: "food", apply: "Through the school" },
+  { name: "Head Start", income: 100, pop: "children_under5", domain: "education", apply: "eclkc.ohs.acf.hhs.gov" },
+  { name: "Section 8 (HCV)", income: 50, pop: "all", domain: "housing", apply: "Local Public Housing Authority", note: "Waitlist — apply when open" },
+  { name: "SSI", income: 0, pop: "disabled", domain: "financial", apply: "SSA — 1-800-772-1213", note: "Disability determination required" },
 ];
 
 const FPL = { 1: 15650, 2: 21150, 3: 26650, 4: 32150, 5: 37650, 6: 43150, 7: 48650, 8: 54150 };
@@ -40,7 +41,7 @@ const RM = { no_concern: 0, concern: 1, crisis: 2 };
 
 export default function App() {
   const [step, setStep] = useState(0);
-  const [intake, setIntake] = useState({ clientId: "", forWhom: "self", state: "MO", county: "", urgency: "standard", householdSize: 1, monthlyIncome: "", hasChildren: false, childrenAges: "", isPregnant: false, isVeteran: false, hasDisability: false, isSenior: false, employmentStatus: "unemployed", housingStatus: "stable" });
+  const [intake, setIntake] = useState({ clientId: "", forWhom: "self", state: "MO", county: "", urgency: "standard", householdSize: 1, monthlyIncome: "", hasChildren: false, childrenAges: "", isPregnant: false, isVeteran: false, hasDisability: false, isSenior: false, employmentStatus: "unemployed", currentBenefits: [], housingStatus: "stable" });
   const [resp, setResp] = useState({});
   const [modal, setModal] = useState(false);
   const [copyText, setCopyText] = useState("");
@@ -61,7 +62,6 @@ export default function App() {
     if (p.pop === "school_age" && !intake.hasChildren) return false;
     if (p.pop === "pregnant_children_under5" && !intake.isPregnant && !intake.hasChildren) return false;
     if (p.pop === "disabled" && !intake.hasDisability) return false;
-    if (p.pop === "adults" && intake.isSenior) return false;
     return true;
   });
 
@@ -154,8 +154,8 @@ export default function App() {
         <Sec t="Next Steps">
           <div style={{ display: "flex", gap: 7, flexWrap: "wrap" }}>
             <Btn l="📋 Copy Report" o={() => { const r = report(); setCopyText(r); setModal(true); navigator.clipboard?.writeText(r); }} />
-            <Btn l="💬 Send to Chat" o={() => sendPrompt(`SDOH screening results — generate referrals and build a service plan:\n\n${report()}`)} primary />
-            <Btn l="🔄 New Screening" o={() => { setStep(0); setIntake({ clientId:"",forWhom:"self",state:"MO",county:"",urgency:"standard",householdSize:1,monthlyIncome:"",hasChildren:false,childrenAges:"",isPregnant:false,isVeteran:false,hasDisability:false,isSenior:false,employmentStatus:"unemployed",housingStatus:"stable" }); setResp({}); }} />
+            <Btn l="💬 Send to Chat" o={() => { const r = report(); if (typeof sendPrompt === "function") { sendPrompt(`SDOH screening results — generate referrals and build a service plan:\n\n${r}`); } else { setCopyText(r); setModal(true); navigator.clipboard?.writeText(r); } }} primary />
+            <Btn l="🔄 New Screening" o={() => { setStep(0); setIntake({ clientId:"",forWhom:"self",state:"MO",county:"",urgency:"standard",householdSize:1,monthlyIncome:"",hasChildren:false,childrenAges:"",isPregnant:false,isVeteran:false,hasDisability:false,isSenior:false,employmentStatus:"unemployed",currentBenefits:[],housingStatus:"stable" }); setResp({}); }} />
           </div>
         </Sec>
       </div>}
