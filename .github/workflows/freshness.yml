@@ -1,0 +1,40 @@
+name: Resource Freshness Check
+
+# Runs monthly on the 1st — flags stale resources as GitHub issues
+on:
+  schedule:
+    - cron: "0 9 1 * *"  # 9am UTC on the 1st of each month
+  workflow_dispatch:       # Manual trigger
+
+jobs:
+  check-freshness:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check resource freshness
+        id: freshness
+        run: |
+          OUTPUT=$(node scripts/check-freshness.js --json 2>&1) || true
+          echo "result=$OUTPUT" >> $GITHUB_OUTPUT
+          STALE_COUNT=$(echo "$OUTPUT" | node -e "const d=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')); console.log(d.staleCount)")
+          echo "stale_count=$STALE_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Create issue if stale resources found
+        if: steps.freshness.outputs.stale_count != '0'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const data = JSON.parse('${{ steps.freshness.outputs.result }}'.replace(/'/g, "\\'"));
+            const entries = data.entries.map(e => `- [ ] **${e.name}** (\`${e.id}\`) — ${e.reason}`).join('\n');
+            const body = `## Monthly Freshness Check\n\n${data.staleCount} resource(s) need re-verification (>180 days):\n\n${entries}\n\nPlease verify phone numbers, hours, and addresses for each resource and update the \`verified\` date.\n\nRun \`node scripts/check-freshness.js\` locally to see the full report.`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Data freshness: ${data.staleCount} resource(s) need re-verification`,
+              body: body,
+              labels: ['data-quality']
+            });

@@ -1,0 +1,28 @@
+name: Stale Issues
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"  # Every Monday 9am UTC
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          stale-issue-message: >
+            This issue has been open for 60 days without activity.
+            It will be closed in 14 days if there is no further activity.
+            If this resource still needs to be added or the data issue persists,
+            please comment to keep it open.
+          stale-pr-message: >
+            This pull request has been open for 30 days without activity.
+            It will be closed in 14 days if there is no further activity.
+          days-before-issue-stale: 60
+          days-before-pr-stale: 30
+          days-before-close: 14
+          exempt-issue-labels: "pinned,security"
+          exempt-pr-labels: "pinned"

@@ -6,7 +6,11 @@
   "scripts": {
     "validate": "node scripts/validate.js",
     "test": "node tests/eligibility.test.js",
-    "check": "node scripts/validate.js && node tests/eligibility.test.js"
+    "check:freshness": "node scripts/check-freshness.js",
+    "check:i18n": "node scripts/check-i18n.js",
+    "check:fpl": "node scripts/check-fpl-year.js",
+    "check": "node scripts/validate.js && node tests/eligibility.test.js",
+    "check:all": "node scripts/validate.js && node tests/eligibility.test.js; node scripts/check-i18n.js; node scripts/check-fpl-year.js"
   },
   "peerDependencies": {
     "react": ">=18.0.0"
