@@ -1,0 +1,40 @@
+name: FPL Year Check
+
+# Runs annually in February — FPL guidelines are usually published in January
+on:
+  schedule:
+    - cron: "0 9 1 2 *"  # Feb 1st, 9am UTC
+  workflow_dispatch:
+
+jobs:
+  check-fpl:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check FPL year
+        id: fpl
+        run: |
+          if ! node scripts/check-fpl-year.js; then
+            echo "outdated=true" >> $GITHUB_OUTPUT
+          else
+            echo "outdated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create issue if FPL outdated
+        if: steps.fpl.outputs.outdated == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const year = new Date().getFullYear();
+            const body = `## Annual FPL Update Needed\n\nThe Federal Poverty Level values in \`intake-app.jsx\` are from a previous year. The ${year} HHS Poverty Guidelines have likely been published.\n\n### What to update\n1. Update \`FPL_${year - 1}\` to \`FPL_${year}\` in \`intake-app.jsx\`\n2. Update the dollar amounts from the [HHS Poverty Guidelines](https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines)\n3. Update the corresponding values in \`tests/eligibility.test.js\`\n4. Run \`npm run check\` to verify all tests pass\n\n### Why this matters\nBenefits eligibility thresholds (SNAP, Medicaid, WIC, etc.) are based on FPL percentages. Outdated values will show incorrect eligibility results.`;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Update FPL values to ${year}`,
+              body: body,
+              labels: ['enhancement']
+            });

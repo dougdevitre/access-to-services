@@ -1,5 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { LANGUAGES, t } from "./i18n.js";
+import { matchResources, generateHandoffScript } from "./resource-matcher.js";
+import { REFERRAL_STATUSES, STATUS_MAP, createReferral, generateReferralSummary } from "./referral-tracker.js";
+import { saveScreening, getClientScreenings, hasHistory, compareScreenings } from "./client-history.js";
 
 const DOMAIN_IDS = [
   "food", "housing", "safety", "transportation", "utilities", "financial",
@@ -65,11 +68,28 @@ export default function SDOHIntakeApp() {
   const [responses, setResponses] = useState(saved?.responses ?? {});
   const [showCopyModal, setShowCopyModal] = useState(false);
   const [copyContent, setCopyContent] = useState("");
+  const [referrals, setReferrals] = useState(saved?.referrals ?? []);
+  const [resourceData, setResourceData] = useState(null);
+  const [handoffScript, setHandoffScript] = useState(null);
+  const [showHistory, setShowHistory] = useState(false);
 
   const T = (key, params) => t(lang, key, params);
 
+  // Load resource directory on mount
+  useEffect(() => {
+    fetch("./mo-resources.json")
+      .then(r => r.json())
+      .then(d => setResourceData(d.resources))
+      .catch(() => {});
+  }, []);
+
   // Persist session on changes
   useEffect(() => { saveSession(step, intake, responses); }, [step, intake, responses]);
+
+  // Auto-match resources when reaching results step
+  const matchedResources = (step >= 2 && resourceData && flaggedIds.length > 0)
+    ? matchResources(resourceData, flaggedIds, intake.county, intake.state)
+    : {};
 
   const updateIntake = (field, value) => setIntake(prev => ({ ...prev, [field]: value }));
   const updateResponse = (domainId, value) => setResponses(prev => ({ ...prev, [domainId]: value }));
@@ -171,10 +191,36 @@ export default function SDOHIntakeApp() {
   };
 
   const handleReset = () => {
+    // Save to history before resetting if we have a client ID and screening data
+    if (intake.clientId && screenedCount > 0) {
+      saveScreening(intake.clientId, intake, responses, referrals, compositeScore);
+    }
     setStep(0);
     setIntake(INITIAL_INTAKE);
     setResponses({});
+    setReferrals([]);
+    setHandoffScript(null);
     clearSession();
+  };
+
+  const handleAddReferral = (domainId, resource) => {
+    setReferrals(prev => [...prev, createReferral(domainId, resource.id, resource.name)]);
+  };
+
+  const handleUpdateReferral = (index, updates) => {
+    setReferrals(prev => prev.map((r, i) => i === index ? { ...r, ...updates, updatedAt: new Date().toISOString() } : r));
+  };
+
+  const handleShowHandoff = (resource, domainId) => {
+    setHandoffScript(generateHandoffScript(resource, T("d." + domainId), intake.clientId));
+  };
+
+  const handleLoadPrevious = (screening) => {
+    setIntake(screening.intake);
+    setResponses(screening.responses);
+    setReferrals(screening.referrals || []);
+    setStep(2);
+    setShowHistory(false);
   };
 
   const canProceed = step === 0
@@ -182,6 +228,9 @@ export default function SDOHIntakeApp() {
     : step === 1
       ? screenedCount >= 8
       : true;
+
+  const previousScreenings = intake.clientId ? getClientScreenings(intake.clientId) : [];
+  const clientHasPrevious = intake.clientId ? hasHistory(intake.clientId) : false;
 
   // Close modal on Escape key
   useEffect(() => {
@@ -207,7 +256,7 @@ export default function SDOHIntakeApp() {
     successLight: "#ecfdf5",
   };
 
-  const stepLabels = [T("stepIntake"), T("stepScreening"), T("stepResults")];
+  const stepLabels = [T("stepIntake"), T("stepScreening"), T("stepResults"), "Referrals & Follow-up"];
   const responseLabelsI18n = { no_concern: T("noConcern"), concern: T("someConcern"), crisis: T("urgentCrisis") };
 
   return (
@@ -244,6 +293,13 @@ export default function SDOHIntakeApp() {
           <Section title={T("clientInfo")}>
             <Row>
               <Field id="clientId" label={T("clientId")} value={intake.clientId} onChange={v => updateIntake("clientId", v)} placeholder={T("clientIdPlaceholder")} />
+              {clientHasPrevious && (
+                <div style={{ alignSelf: "flex-end", marginBottom: 8 }}>
+                  <button onClick={() => setShowHistory(true)} style={{ padding: "7px 12px", borderRadius: 6, border: `1px solid ${colors.accent}`, background: colors.accentLight, color: colors.accent, fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+                    View Previous ({previousScreenings.length})
+                  </button>
+                </div>
+              )}
               <SelectField id="forWhom" label={T("forWhom")} value={intake.forWhom} onChange={v => updateIntake("forWhom", v)} options={[["self",T("forWhomSelf")],["child",T("forWhomChild")],["family",T("forWhomFamily")],["client",T("forWhomClient")]]} />
             </Row>
             <Row>
@@ -406,14 +462,200 @@ export default function SDOHIntakeApp() {
         </div>
       )}
 
+      {/* STEP 3: Referrals & Follow-up */}
+      {step === 3 && (
+        <div aria-label="Referrals and follow-up">
+          {/* Auto-matched resources by domain */}
+          {flaggedIds.length > 0 && (
+            <Section title="Matched Resources">
+              <div style={{ fontSize: 12, color: colors.muted, marginBottom: 12 }}>
+                Resources matched to flagged domains and {intake.county ? `${intake.county}, ` : ""}{intake.state}. Click "Refer" to track, or "Call Script" for a warm handoff.
+              </div>
+              {flaggedIds.map(id => {
+                const resources = matchedResources[id] || [];
+                if (resources.length === 0) return null;
+                return (
+                  <div key={id} style={{ marginBottom: 16 }}>
+                    <h3 style={{ fontSize: 13, fontWeight: 700, color: responses[id] === "crisis" ? colors.danger : colors.warning, marginBottom: 6 }}>
+                      {T("d." + id)} {responses[id] === "crisis" ? "(CRISIS)" : "(Concern)"}
+                    </h3>
+                    {resources.map(r => {
+                      const alreadyReferred = referrals.some(ref => ref.resourceId === r.id && ref.domainId === id);
+                      return (
+                        <div key={r.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 10px", marginBottom: 4, borderRadius: 6, border: `1px solid ${colors.border}`, background: "#fff", flexWrap: "wrap" }}>
+                          <div style={{ flex: 1, minWidth: 150 }}>
+                            <div style={{ fontSize: 13, fontWeight: 600 }}>{r.name}</div>
+                            <div style={{ fontSize: 11, color: colors.muted }}>{r.phone || r.website || r.coverage}</div>
+                          </div>
+                          {!alreadyReferred && (
+                            <button onClick={() => handleAddReferral(id, r)} style={{ padding: "4px 10px", borderRadius: 4, border: `1px solid ${colors.success}`, background: colors.successLight, color: colors.success, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                              + Refer
+                            </button>
+                          )}
+                          {alreadyReferred && (
+                            <span style={{ fontSize: 11, color: colors.success, fontWeight: 600 }}>Referred</span>
+                          )}
+                          {r.phone && (
+                            <button onClick={() => handleShowHandoff(r, id)} style={{ padding: "4px 10px", borderRadius: 4, border: `1px solid ${colors.accent}`, background: colors.accentLight, color: colors.accent, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                              Call Script
+                            </button>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </Section>
+          )}
+
+          {/* Referral tracking */}
+          {referrals.length > 0 && (
+            <Section title={`Referral Tracker (${referrals.length})`}>
+              {referrals.map((ref, i) => (
+                <div key={i} style={{ padding: "10px 12px", marginBottom: 6, borderRadius: 6, border: `1px solid ${colors.border}`, borderLeftWidth: 3, borderLeftColor: STATUS_MAP[ref.status]?.color || colors.border }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                    <div>
+                      <span style={{ fontSize: 13, fontWeight: 600 }}>{ref.resourceName}</span>
+                      <span style={{ fontSize: 11, color: colors.muted, marginLeft: 8 }}>{T("d." + ref.domainId)}</span>
+                    </div>
+                    <select
+                      value={ref.status}
+                      onChange={e => handleUpdateReferral(i, { status: e.target.value })}
+                      aria-label={`Status for ${ref.resourceName}`}
+                      style={{ padding: "3px 8px", borderRadius: 4, border: `1px solid ${STATUS_MAP[ref.status]?.color || colors.border}`, fontSize: 11, fontWeight: 600, color: STATUS_MAP[ref.status]?.color }}
+                    >
+                      {REFERRAL_STATUSES.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                    </select>
+                  </div>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    <div style={{ flex: "0 0 auto" }}>
+                      <label style={{ fontSize: 10, color: colors.muted, display: "block" }}>Follow-up</label>
+                      <input
+                        type="date"
+                        value={ref.followUpDate || ""}
+                        onChange={e => handleUpdateReferral(i, { followUpDate: e.target.value })}
+                        style={{ padding: "3px 6px", borderRadius: 4, border: `1px solid ${colors.border}`, fontSize: 11 }}
+                      />
+                    </div>
+                    <div style={{ flex: 1, minWidth: 150 }}>
+                      <label style={{ fontSize: 10, color: colors.muted, display: "block" }}>Notes</label>
+                      <input
+                        type="text"
+                        value={ref.notes || ""}
+                        onChange={e => handleUpdateReferral(i, { notes: e.target.value })}
+                        placeholder="Provider notes..."
+                        style={{ width: "100%", padding: "3px 6px", borderRadius: 4, border: `1px solid ${colors.border}`, fontSize: 11, boxSizing: "border-box" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </Section>
+          )}
+
+          {/* Client history comparison */}
+          {previousScreenings.length > 0 && (
+            <Section title="Screening History">
+              <div style={{ fontSize: 12, color: colors.muted, marginBottom: 8 }}>
+                {previousScreenings.length} previous screening{previousScreenings.length !== 1 ? "s" : ""} for client {intake.clientId}
+              </div>
+              {(() => {
+                const prev = previousScreenings[0];
+                const comparison = compareScreenings(prev, { responses }, DOMAIN_IDS);
+                const changes = comparison.filter(c => c.change !== "same");
+                if (changes.length === 0) return <div style={{ fontSize: 12, color: colors.muted }}>No changes from last screening ({new Date(prev.date).toLocaleDateString()})</div>;
+                return (
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 4 }}>
+                    {changes.map(c => (
+                      <div key={c.domain} style={{ padding: "6px 8px", borderRadius: 4, fontSize: 11, background: c.change === "improved" ? colors.successLight : c.change === "worsened" ? colors.dangerLight : colors.accentLight, border: `1px solid ${c.change === "improved" ? colors.success : c.change === "worsened" ? colors.danger : colors.accent}` }}>
+                        <strong>{T("d." + c.domain)}</strong>
+                        <div>{c.change === "improved" ? "Improved" : c.change === "worsened" ? "Worsened" : "New"}</div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </Section>
+          )}
+
+          {/* Actions */}
+          <Section title={T("nextSteps")}>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <ActionButton label={T("copyReport")} onClick={() => {
+                const report = generateReport() + "\n\n" + generateReferralSummary(referrals);
+                setCopyContent(report); setShowCopyModal(true); navigator.clipboard?.writeText(report);
+              }} />
+              <ActionButton label={T("sendToChat")} onClick={handleSendToChat} primary />
+              <ActionButton label={T("startNew")} onClick={handleReset} />
+            </div>
+          </Section>
+        </div>
+      )}
+
+      {/* Warm Handoff Script Modal */}
+      {handoffScript && (
+        <div role="dialog" aria-modal="true" aria-label="Warm handoff script" style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999 }} onClick={() => setHandoffScript(null)}>
+          <div style={{ background: "#fff", borderRadius: 12, padding: 20, maxWidth: 520, width: "90%", maxHeight: "80vh", overflow: "auto" }} onClick={e => e.stopPropagation()}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <h3 style={{ margin: 0, fontSize: 16 }}>Warm Handoff Script</h3>
+              <button onClick={() => setHandoffScript(null)} aria-label="Close" style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: colors.muted }}>×</button>
+            </div>
+
+            <div style={{ marginBottom: 14 }}>
+              <h4 style={{ fontSize: 13, color: colors.accent, marginBottom: 4 }}>1. Call the Organization</h4>
+              {handoffScript.before.map((line, i) => <p key={i} style={{ fontSize: 12, margin: "2px 0", fontStyle: "italic", color: "#334155" }}>{line}</p>)}
+            </div>
+
+            <div style={{ marginBottom: 14 }}>
+              <h4 style={{ fontSize: 13, color: colors.accent, marginBottom: 4 }}>2. Introduce the Client</h4>
+              {handoffScript.intro.map((line, i) => <p key={i} style={{ fontSize: 12, margin: "2px 0", fontStyle: "italic", color: "#334155" }}>{line}</p>)}
+            </div>
+
+            <div style={{ marginBottom: 14, background: "#f8fafc", padding: 10, borderRadius: 6 }}>
+              <h4 style={{ fontSize: 13, color: colors.accent, marginBottom: 4 }}>Resource Details</h4>
+              {handoffScript.details.map((line, i) => <div key={i} style={{ fontSize: 12, margin: "2px 0" }}>{line}</div>)}
+            </div>
+
+            <div>
+              <h4 style={{ fontSize: 13, color: colors.accent, marginBottom: 4 }}>3. After the Call</h4>
+              {handoffScript.after.map((line, i) => <div key={i} style={{ fontSize: 12, margin: "2px 0" }}>{line}</div>)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Client History Modal */}
+      {showHistory && (
+        <div role="dialog" aria-modal="true" aria-label="Client history" style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, background: "rgba(0,0,0,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 999 }} onClick={() => setShowHistory(false)}>
+          <div style={{ background: "#fff", borderRadius: 12, padding: 20, maxWidth: 520, width: "90%", maxHeight: "80vh", overflow: "auto" }} onClick={e => e.stopPropagation()}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+              <h3 style={{ margin: 0, fontSize: 16 }}>Previous Screenings — {intake.clientId}</h3>
+              <button onClick={() => setShowHistory(false)} aria-label="Close" style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", color: colors.muted }}>×</button>
+            </div>
+            {previousScreenings.map((s, i) => (
+              <div key={i} style={{ padding: "10px 12px", marginBottom: 6, borderRadius: 6, border: `1px solid ${colors.border}`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 600 }}>{new Date(s.date).toLocaleDateString()}</div>
+                  <div style={{ fontSize: 11, color: colors.muted }}>Score: {s.compositeScore}/28 · {Object.values(s.responses).filter(r => r === "crisis").length} crisis · {Object.values(s.responses).filter(r => r === "concern").length} concern</div>
+                </div>
+                <button onClick={() => handleLoadPrevious(s)} style={{ padding: "5px 10px", borderRadius: 4, border: `1px solid ${colors.accent}`, background: colors.accentLight, color: colors.accent, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                  Load
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav aria-label="Step navigation" style={{ display: "flex", justifyContent: "space-between", marginTop: 24, paddingTop: 16, borderTop: `1px solid ${colors.border}` }}>
         <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0} aria-label={T("back")} style={{ padding: "10px 20px", borderRadius: 8, border: `1px solid ${colors.border}`, background: "transparent", color: step === 0 ? colors.border : colors.muted, cursor: step === 0 ? "default" : "pointer", fontSize: 13, fontWeight: 500 }}>
           {T("back")}
         </button>
-        {step < 2 && (
-          <button onClick={() => setStep(step + 1)} disabled={!canProceed} aria-label={step === 0 ? T("beginScreening") : T("viewResults")} style={{ padding: "10px 24px", borderRadius: 8, border: "none", fontSize: 13, fontWeight: 600, cursor: canProceed ? "pointer" : "default", background: canProceed ? colors.accent : colors.border, color: canProceed ? "#fff" : colors.muted }}>
-            {step === 0 ? T("beginScreening") : T("viewResults")}
+        {step < 3 && (
+          <button onClick={() => setStep(step + 1)} disabled={!canProceed} aria-label={step === 0 ? T("beginScreening") : step === 1 ? T("viewResults") : "Referrals & Follow-up"} style={{ padding: "10px 24px", borderRadius: 8, border: "none", fontSize: 13, fontWeight: 600, cursor: canProceed ? "pointer" : "default", background: canProceed ? colors.accent : colors.border, color: canProceed ? "#fff" : colors.muted }}>
+            {step === 0 ? T("beginScreening") : step === 1 ? T("viewResults") : "Referrals & Follow-up"}
           </button>
         )}
       </nav>

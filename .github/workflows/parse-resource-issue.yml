@@ -1,0 +1,45 @@
+name: Parse Resource Submission
+
+# When an "Add Resource" issue is opened, parse it and add a checklist comment
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  parse:
+    if: contains(github.event.issue.title, 'Add resource')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Add triage comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+
+            // Check which fields are filled in
+            const checks = [
+              { label: 'Name provided', test: /\*\*Name:\*\*\s*\S+/.test(body) },
+              { label: 'Phone provided', test: /\*\*Phone:\*\*\s*\S+/.test(body) },
+              { label: 'Service domains specified', test: /domains.*:\s*\S+/i.test(body) },
+              { label: 'Coverage area specified', test: /coverage.*:\s*\S+/i.test(body) },
+              { label: 'Population specified', test: /population.*:\s*\S+/i.test(body) },
+              { label: 'Description provided', test: /description.*:\s*\S+/i.test(body) },
+              { label: 'Verification confirmed', test: /\[x\]/i.test(body) },
+            ];
+
+            const filled = checks.filter(c => c.test).length;
+            const total = checks.length;
+            const checklist = checks.map(c => `- [${c.test ? 'x' : ' '}] ${c.label}`).join('\n');
+
+            const comment = `### Resource Submission Triage (${filled}/${total} fields)\n\n${checklist}\n\n${filled === total
+              ? 'All fields provided. Ready for a maintainer to verify and add to `mo-resources.json`.'
+              : `Missing ${total - filled} field(s). Please update the issue with the missing information before this can be added.`}\n\n---\n*To add this resource, a maintainer should:*\n1. Verify the phone number and website\n2. Add the entry to \`mo-resources.json\`\n3. Run \`node scripts/validate.js\`\n4. Submit a PR referencing this issue`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment,
+            });

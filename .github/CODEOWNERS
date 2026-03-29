@@ -1,0 +1,15 @@
+# Resource data — requires data maintainer review
+mo-resources.json @dougdevitre
+mo-resources.schema.json @dougdevitre
+
+# Core application logic
+intake-app.jsx @dougdevitre
+resource-matcher.js @dougdevitre
+referral-tracker.js @dougdevitre
+client-history.js @dougdevitre
+
+# Translations
+i18n.js @dougdevitre
+
+# CI/CD
+.github/ @dougdevitre
