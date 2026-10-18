@@ -25,8 +25,11 @@ const PROGRAMS = [
   { name: "SSI", income: 0, pop: "disabled", domain: "financial", apply: "SSA — 1-800-772-1213", note: "Disability determination required" },
 ];
 
-const FPL_2025 = { 1: 15650, 2: 21150, 3: 26650, 4: 32150, 5: 37650, 6: 43150, 7: 48650, 8: 54150 };
-const fplFor = (size) => FPL_2025[Math.min(size, 8)] + Math.max(0, size - 8) * 5500;
+// 2026 HHS Poverty Guidelines, 48 contiguous states + DC (annual, 100% FPL).
+// Source: Federal Register 91 FR 1797 (Jan 15, 2026), doc 2026-00755; effective Jan 13, 2026.
+// Update each January: https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines
+const FPL_2026 = { 1: 15960, 2: 21640, 3: 27320, 4: 33000, 5: 38680, 6: 44360, 7: 50040, 8: 55720 };
+const fplFor = (size) => FPL_2026[Math.min(size, 8)] + Math.max(0, size - 8) * 5680;
 const fplPct = (income, size) => Math.round((income * 12 / fplFor(size)) * 100);
 
 const RESPONSE_MAP = { no_concern: 0, concern: 1, crisis: 2 };
@@ -757,4 +760,4 @@ function ActionButton({ label, onClick, primary }) {
 }
 
 // Export constants for testing
-export { DOMAIN_IDS, PROGRAMS, FPL_2025, fplFor, fplPct, RESPONSE_MAP };
+export { DOMAIN_IDS, PROGRAMS, FPL_2026, fplFor, fplPct, RESPONSE_MAP };
