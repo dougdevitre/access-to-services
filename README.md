@@ -1,5 +1,10 @@
 # Access to Services
 
+<!-- BEGIN DISCLAIMER: synced from dougdevitre/access-to, edit it there -->
+> [!IMPORTANT]
+> **Educational information only.** Access to Services is not legal, medical, mental health, financial or safety advice, and using it creates no professional relationship. **In danger now? Call 911. For crisis support, call or text 988.** Confirm anything important with the official source or a licensed professional. Read the full [disclaimer](DISCLAIMER.md).
+<!-- END DISCLAIMER -->
+
 **A Social Determinants of Health (SDOH) screening, referral, and follow-up tool for Missouri.**
 
 > Part of **[Access To](https://dougdevitre.org)** — open-source tools for the access gaps that matter most. [See all projects →](https://dougdevitre.org/#pillars)
