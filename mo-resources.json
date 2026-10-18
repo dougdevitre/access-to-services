@@ -2,7 +2,7 @@
   "meta": {
     "version": "1.0",
     "state": "MO",
-    "last_updated": "2026-03-28",
+    "last_updated": "2026-10-18",
     "note": "Verify all entries before sharing with clients. Phone numbers and hours change frequently."
   },
   "resources": [
@@ -18,7 +18,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Social services information and referral for all Missouri counties",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mo-child-abuse",
@@ -31,7 +31,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Report suspected child abuse or neglect. Missouri is a universal mandatory reporting state.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mo-adult-abuse",
@@ -39,12 +39,12 @@
       "domain": ["public_safety", "aging"],
       "type": "hotline",
       "phone": "1-800-392-0210",
-      "hours": "24/7",
+      "hours": "Daily 7am-8pm (online reports 24/7 at moapss.health.mo.gov; call 911 in an emergency)",
       "coverage": "statewide",
       "population": ["all"],
       "cost": "free",
       "description": "Report suspected abuse, neglect, or exploitation of vulnerable adults.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-988",
@@ -57,7 +57,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Call or text 988 for suicide, mental health, or substance use crisis support.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-crisis-text",
@@ -70,7 +70,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Text-based crisis support for any type of crisis.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-dv-hotline",
@@ -84,7 +84,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Confidential support, safety planning, and referrals for DV survivors. Multilingual.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-samhsa",
@@ -97,7 +97,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Treatment referrals, information, and support for substance use and mental health.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-rainn",
@@ -110,7 +110,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Crisis support for sexual assault survivors. Also online at online.rainn.org.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-trafficking",
@@ -118,13 +118,13 @@
       "domain": ["public_safety"],
       "type": "hotline",
       "phone": "1-888-373-7888",
-      "phone_alt": "Text HELP to 233733",
+      "phone_alt": "Text 233733",
       "hours": "24/7",
       "coverage": "national",
       "population": ["all"],
       "cost": "free",
       "description": "Report trafficking, get help, or request services for survivors.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "stl-foodbank",
@@ -140,7 +140,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Regional food bank serving 26 counties in eastern Missouri. Find pantries at stlfoodbank.org.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "harvesters",
@@ -155,7 +155,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "Regional food bank serving 26 counties in western Missouri and NE Kansas.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "ozarks-food-harvest",
@@ -169,14 +169,14 @@
       "population": ["all"],
       "cost": "free",
       "description": "Regional food bank serving 28 counties in SW Missouri.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "bhr",
       "name": "Behavioral Health Response",
       "domain": ["mental_health", "crisis", "substance_use"],
       "type": "cmhc",
-      "phone": "314-469-6644",
+      "phone": "314-819-8811",
       "hours": "24/7 crisis line",
       "website": "bhrstl.org",
       "coverage": "stl_metro",
@@ -185,21 +185,23 @@
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "CCBHC providing crisis services, counseling, psychiatry, substance use treatment, and crisis stabilization.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "Phone updated 2026-10-18 from bhrstl.org/contact; the previous 314-469-6644 is no longer listed. For a mental health crisis, 988."
     },
     {
       "id": "compass-health",
       "name": "Compass Health Network",
       "domain": ["mental_health", "substance_use", "healthcare"],
       "type": "cmhc",
-      "phone": "1-800-640-2266",
+      "phone": "844-853-8937",
       "website": "compasshealthnetwork.org",
       "coverage": "central_ne_mo",
       "population": ["all"],
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "CCBHC providing MH, SUD, primary care, dental, and crisis services across central and NE Missouri.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "General/appointments line per compasshealthnetwork.org. Crisis centers: 833-356-2427; 24/7 crisis: 988. The previous 1-800-640-2266 is not listed on the site."
     },
     {
       "id": "burrell",
@@ -207,14 +209,14 @@
       "domain": ["mental_health", "substance_use"],
       "type": "cmhc",
       "phone": "417-761-5000",
-      "website": "bfrhealth.com",
+      "website": "burrellcenter.com",
       "coverage": "sw_mo",
       "counties": ["Greene", "Christian", "Webster", "Jasper", "Newton"],
       "population": ["all"],
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "CCBHC providing MH, SUD, crisis, and community support services in SW Missouri.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "lsem",
@@ -228,7 +230,7 @@
       "population": ["low_income"],
       "cost": "free",
       "description": "Free civil legal services for low-income residents: housing, family law, benefits, consumer, immigration.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "lawmo",
@@ -236,13 +238,13 @@
       "domain": ["legal"],
       "type": "legal_aid",
       "phone": "816-474-6750",
-      "phone_alt": "1-866-534-2568",
       "website": "lawmo.org",
       "coverage": "western_mo",
       "population": ["low_income"],
       "cost": "free",
       "description": "Free civil legal services for low-income residents in western Missouri.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "Removed phone_alt 1-866-534-2568: not found on lawmo.org or its brochure. Branch toll-free lines are on lawmo.org."
     },
     {
       "id": "mo-fsd",
@@ -251,24 +253,25 @@
       "type": "government",
       "phone": "1-855-373-4636",
       "website": "mydss.mo.gov",
-      "hours": "Mon-Fri business hours",
+      "hours": "Mon-Fri 8:00 a.m.-5:00 p.m.",
       "coverage": "statewide",
       "population": ["all"],
       "cost": "free",
       "description": "SNAP, TANF, Medicaid, child care subsidy, energy assistance applications and case management.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mo-first-steps",
       "name": "Missouri First Steps (Early Intervention)",
       "domain": ["children", "disability", "education"],
       "type": "government",
-      "phone": "1-866-583-2392",
+      "phone": "1-866-583-2392 ext. 3",
       "coverage": "statewide",
       "population": ["children_0_3"],
       "cost": "free",
       "description": "Developmental services for infants and toddlers (birth to 3) with developmental delays or disabilities.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "website": "dese.mo.gov/childhood/early-intervention/first-steps"
     },
     {
       "id": "mo-pat",
@@ -280,7 +283,7 @@
       "population": ["families_prenatal_5"],
       "cost": "free",
       "description": "Free home visiting for families with children prenatal to age 5. Contact local school district to enroll.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "stl-ha",
@@ -294,32 +297,34 @@
       "population": ["low_income"],
       "cost": "income_based",
       "description": "Public housing and Housing Choice Voucher (Section 8) program for St. Louis City.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "oats",
       "name": "OATS Transit",
       "domain": ["transportation"],
       "type": "transit",
-      "phone": "1-800-654-6287",
+      "phone": "1-888-875-6287",
       "website": "oatstransit.org",
       "coverage": "rural_mo",
       "population": ["seniors", "disabled", "all_rural"],
       "cost": "suggested_donation",
       "description": "Rural transit serving 87 Missouri counties. Door-to-door service. Priority for seniors 60+ and people with disabilities.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "Corporate line per oatstransit.org; riders schedule trips through their regional office (listed on the site)."
     },
     {
       "id": "mo-vr",
       "name": "Missouri Vocational Rehabilitation",
       "domain": ["employment", "disability"],
       "type": "government",
-      "website": "dese.mo.gov/vr",
+      "website": "dese.mo.gov/adult-learning-rehabilitation-services/vocational-rehabilitation",
       "coverage": "statewide",
       "population": ["disabled"],
       "cost": "free",
       "description": "Employment services for people with disabilities: counseling, training, job placement, assistive technology.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "phone": "1-877-222-8963"
     },
     {
       "id": "mo-pa",
@@ -332,49 +337,54 @@
       "population": ["disabled"],
       "cost": "free",
       "description": "Legal advocacy for disability rights: ADA, special education, abuse/neglect, guardianship alternatives.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mpact",
       "name": "MPACT (Missouri Parents Act)",
       "domain": ["education", "disability"],
       "type": "advocacy",
-      "website": "ptimpact.org",
+      "website": "missouriparentsact.org",
       "coverage": "statewide",
       "population": ["families_children_disabilities"],
       "cost": "free",
       "description": "Parent Training & Information Center. Free special education advocacy for families of children with disabilities.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "phone": "800-743-7634"
     },
     {
       "id": "stl-job-center-north",
-      "name": "Missouri Job Center — North County",
+      "name": "St. Louis County - Ferguson Job Center",
       "domain": ["employment"],
       "type": "workforce",
-      "address": "4040 Seven Hills Dr, Florissant, MO 63033",
+      "address": "2900 Pershall Rd, Suite 166, St. Louis, MO 63136",
       "coverage": "stl_north_county",
       "counties": ["St. Louis County"],
       "population": ["all"],
       "cost": "free",
       "description": "WIOA employment services: job matching, resume help, interview prep, training referrals.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "phone": "314-475-7900",
+      "website": "jobs.mo.gov/job-centers/st-louis-county-ferguson-job-center",
+      "hours": "Mon-Thu 8am-1pm & 2pm-4:30pm; Fri 9am-1pm & 2pm-4pm",
+      "note": "Formerly the Florissant Job Center (4040 Seven Hills Dr)."
     },
     {
       "id": "claim-mo",
-      "name": "CLAIM (Missouri SHIP)",
+      "name": "Missouri SHIP (formerly CLAIM)",
       "domain": ["aging", "healthcare"],
       "type": "counseling",
       "phone": "1-800-390-3330",
-      "website": "claimmo.org",
+      "website": "missouriship.org",
       "coverage": "statewide",
       "population": ["seniors", "medicare"],
       "cost": "free",
       "description": "Free Medicare counseling: plan comparison, enrollment help, billing issues, appeals.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mo-seniorx",
-      "name": "Missouri SenioRx",
+      "name": "Missouri Rx Plan (MoRx)",
       "domain": ["aging", "healthcare"],
       "type": "assistance",
       "phone": "1-800-375-1406",
@@ -382,7 +392,9 @@
       "population": ["seniors"],
       "cost": "free",
       "description": "Prescription drug assistance program for Missouri seniors.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "website": "dss.mo.gov/mhd/morx-general-faqs",
+      "note": "NEEDS CALL: 1-800-375-1406 appears on the state toll-free list (mocor.mo.gov) but not on current DSS MoRx pages. SenioRx is no longer the program name."
     },
     {
       "id": "nat-eldercare",
@@ -391,12 +403,12 @@
       "type": "hotline",
       "phone": "1-800-677-1116",
       "website": "eldercare.acl.gov",
-      "hours": "Mon-Fri 9am-8pm ET",
+      "hours": "Mon-Fri 8am-9pm ET",
       "coverage": "national",
       "population": ["seniors", "caregivers"],
       "cost": "free",
       "description": "Connects older adults and caregivers to local Area Agency on Aging and community services.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-childhelp",
@@ -409,7 +421,8 @@
       "population": ["all"],
       "cost": "free",
       "description": "Crisis intervention, information, and referrals for child abuse situations.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "website": "childhelphotline.org"
     },
     {
       "id": "nat-trevor",
@@ -423,7 +436,8 @@
       "population": ["lgbtq_youth"],
       "cost": "free",
       "description": "Crisis intervention and suicide prevention for LGBTQ+ young people.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "website": "thetrevorproject.org"
     },
     {
       "id": "stl-fqhc-affinia",
@@ -432,31 +446,31 @@
       "type": "fqhc",
       "phone": "314-814-8700",
       "website": "affiniahealthcare.org",
-      "address": "4414 N Market St, St. Louis, MO 63113",
-      "hours": "Mon-Fri 8am-5pm",
+      "address": "4414 N Florissant Ave, St. Louis, MO 63107",
+      "hours": "Mon-Fri 8:30am-5:30pm",
       "coverage": "stl_metro",
       "counties": ["St. Louis City", "St. Louis County"],
       "population": ["all"],
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "FQHC providing primary care, dental, behavioral health, and pharmacy services. Sliding fee scale for uninsured.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "stl-fqhc-family-care",
       "name": "Family Care Health Centers",
       "domain": ["healthcare"],
       "type": "fqhc",
-      "phone": "314-481-5765",
+      "phone": "314-834-2273",
       "website": "familycarehealthcenters.org",
-      "address": "4215 S Grand Blvd, St. Louis, MO 63111",
+      "address": "3824 S Grand Blvd, St. Louis, MO 63118",
       "coverage": "stl_metro",
       "counties": ["St. Louis City", "St. Louis County"],
       "population": ["all"],
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "FQHC with multiple locations offering primary care, OB/GYN, pediatrics, dental, and behavioral health.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "kc-fqhc-swope",
@@ -465,14 +479,14 @@
       "type": "fqhc",
       "phone": "816-923-5800",
       "website": "swopehealth.org",
-      "address": "3801 Blue Pkwy, Kansas City, MO 64130",
+      "address": "3801 Dr. Martin Luther King Jr. Blvd, Kansas City, MO 64130",
       "coverage": "kc_metro",
       "counties": ["Jackson", "Clay", "Platte"],
       "population": ["all"],
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "FQHC providing primary care, behavioral health, dental, pharmacy, and WIC services in the KC metro.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "kc-fqhc-samuel-rodgers",
@@ -480,7 +494,7 @@
       "domain": ["healthcare"],
       "type": "fqhc",
       "phone": "816-474-4920",
-      "website": "rodgershealth.org",
+      "website": "samrodgers.org",
       "address": "825 Euclid Ave, Kansas City, MO 64124",
       "coverage": "kc_metro",
       "counties": ["Jackson"],
@@ -488,36 +502,7 @@
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "FQHC providing primary care, dental, behavioral health, and pharmacy. Serves uninsured and underinsured patients.",
-      "verified": "2026-03-28"
-    },
-    {
-      "id": "mid-mo-fqhc-mu",
-      "name": "MU Health Care Family Medicine",
-      "domain": ["healthcare"],
-      "type": "fqhc",
-      "phone": "573-882-8526",
-      "website": "muhealth.org",
-      "coverage": "mid_mo",
-      "counties": ["Boone"],
-      "population": ["all"],
-      "cost": "sliding_scale",
-      "insurance": ["medicaid", "medicare", "private", "uninsured"],
-      "description": "Academic medical center with community health programs serving mid-Missouri. Sliding fee available.",
-      "verified": "2026-03-28"
-    },
-    {
-      "id": "se-mo-fqhc-delta",
-      "name": "Delta Area Health Education Center",
-      "domain": ["healthcare"],
-      "type": "fqhc",
-      "phone": "573-471-0636",
-      "coverage": "se_mo",
-      "counties": ["Scott", "Mississippi", "New Madrid", "Pemiscot", "Dunklin"],
-      "population": ["all"],
-      "cost": "sliding_scale",
-      "insurance": ["medicaid", "medicare", "private", "uninsured"],
-      "description": "Health education and primary care access serving the Missouri Bootheel region.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "stl-shelter-gateway",
@@ -525,13 +510,13 @@
       "domain": ["housing"],
       "type": "shelter",
       "phone": "314-231-1515",
-      "address": "1419 N 11th St, St. Louis, MO 63106",
       "coverage": "stl_metro",
       "counties": ["St. Louis City"],
       "population": ["homeless"],
       "cost": "free",
       "description": "Emergency shelter for single adults and families experiencing homelessness in St. Louis City.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS REVIEW: this entry mixes two organizations. 314-231-1515 is reported as Gateway180 (women, children, families; 1000 N 19th St). Peter & Paul Community Services (ppcsinc.org) runs a referral-only shelter for single men via 211 or St. Patrick Center. The listed address matched neither and was removed."
     },
     {
       "id": "kc-shelter-city-union",
@@ -546,7 +531,8 @@
       "population": ["homeless"],
       "cost": "free",
       "description": "Emergency shelter, meals, and recovery programs for men, women, and families in Kansas City.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "Shelter Hotline for people experiencing homelessness: 816-474-4599 (cityunionmission.org)."
     },
     {
       "id": "mo-coalition-dv",
@@ -559,13 +545,13 @@
       "population": ["all"],
       "cost": "free",
       "description": "Statewide coalition connecting survivors to local DV shelters and services. Find your local program via website.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "stl-safe-connections",
       "name": "Safe Connections",
       "domain": ["public_safety"],
-      "type": "dv_shelter",
+      "type": "counseling",
       "phone": "314-531-2003",
       "website": "safeconnections.org",
       "hours": "24/7 crisis line",
@@ -573,8 +559,8 @@
       "counties": ["St. Louis City", "St. Louis County"],
       "population": ["all"],
       "cost": "free",
-      "description": "Crisis intervention, counseling, legal advocacy, and housing for survivors of domestic and sexual violence.",
-      "verified": "2026-03-28"
+      "description": "24-hour crisis helpline (call or text), crisis intervention, individual therapy, prevention education, and support services for survivors of domestic and sexual violence. Not a shelter.",
+      "verified": "2026-10-18"
     },
     {
       "id": "va-stl",
@@ -589,11 +575,11 @@
       "cost": "free",
       "insurance": ["medicare"],
       "description": "VA medical center providing primary care, mental health, substance use treatment, and specialty care for veterans.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "va-kc",
-      "name": "VA Kansas City Medical Center",
+      "name": "Kansas City VA Medical Center",
       "domain": ["healthcare", "mental_health"],
       "type": "va_medical",
       "phone": "816-861-4700",
@@ -604,7 +590,7 @@
       "cost": "free",
       "insurance": ["medicare"],
       "description": "VA medical center serving veterans in western Missouri and eastern Kansas.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "nat-veterans-crisis",
@@ -618,7 +604,7 @@
       "population": ["veterans"],
       "cost": "free",
       "description": "Crisis support for veterans, service members, and their families. Call 988 then press 1.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mo-sud-preferred-family",
@@ -632,7 +618,8 @@
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
       "description": "Statewide SUD and mental health treatment provider with 80+ locations. Offers detox, residential, outpatient, and MAT.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS CALL: 1-800-731-3070 is not listed on pfh.org (HQ 660-665-1962). Site now reads 'Preferred Family Health'."
     },
     {
       "id": "stl-sud-ncada",
@@ -647,23 +634,25 @@
       "cost": "sliding_scale",
       "insurance": ["medicaid", "private", "uninsured"],
       "description": "Substance use assessment, education, outpatient treatment, and recovery support in the St. Louis area.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS REVIEW: NCADA-St. Louis appears to operate as PreventEd (prevented.org) and focuses on prevention and early intervention, not treatment. Name, phone, website and type unconfirmed."
     },
     {
       "id": "mo-reentry-coalition",
       "name": "Missouri Reentry Process",
       "domain": ["reentry", "employment"],
       "type": "government",
-      "website": "doc.mo.gov/programs/reentry",
+      "website": "doc.mo.gov/programs/missouri-reentry-process",
       "coverage": "statewide",
       "population": ["justice_involved"],
       "cost": "free",
       "description": "Missouri DOC reentry resources including transition planning, employment, housing, and ID recovery for returning citizens.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "phone": "573-751-2389"
     },
     {
       "id": "stl-reentry-employment",
-      "name": "Center for Women in Transition",
+      "name": "Keyway Center for Diversion and Reentry (formerly Center for Women in Transition)",
       "domain": ["reentry", "employment", "housing"],
       "type": "reentry",
       "phone": "314-588-8300",
@@ -672,60 +661,51 @@
       "population": ["justice_involved"],
       "cost": "free",
       "description": "Reentry services for women: housing, employment, case management, and family reunification.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS CALL: renamed in 2022 (National Institute of Corrections). Phone 314-588-8300 and address unconfirmed; check keywaycenter.org."
     },
     {
       "id": "mid-mo-caa",
       "name": "Central Missouri Community Action (CMCA)",
       "domain": ["food", "housing", "financial", "transportation"],
       "type": "community_action",
-      "phone": "573-443-8706",
+      "phone": "573-443-1100",
       "website": "cmca.us",
       "coverage": "mid_mo",
-      "counties": ["Boone", "Howard", "Cooper", "Moniteau", "Audrain", "Callaway"],
+      "counties": ["Audrain", "Benton", "Boone", "Callaway", "Cole", "Cooper", "Hickory", "Moniteau", "Morgan", "Osage"],
       "population": ["low_income"],
       "cost": "free",
       "description": "Community Action Agency administering LIHEAP, weatherization, emergency rent/utility assistance, and food programs.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "Boone County CAA line per dss.mo.gov; Energy Assistance: 573-200-6655 (cmca.us). The previous 573-443-8706 is not listed. Howard County is served for LIHEAP only."
     },
     {
       "id": "se-mo-caa-delta",
       "name": "Delta Area Economic Opportunity Corporation",
       "domain": ["food", "housing", "financial"],
       "type": "community_action",
-      "phone": "573-471-4426",
+      "phone": "573-471-4114",
       "coverage": "se_mo",
-      "counties": ["Pemiscot", "Dunklin", "New Madrid", "Mississippi", "Scott", "Stoddard", "Butler"],
+      "counties": ["Dunklin", "Mississippi", "New Madrid", "Pemiscot", "Scott", "Stoddard"],
       "population": ["low_income"],
       "cost": "free",
       "description": "Community Action Agency serving the Bootheel. Head Start, LIHEAP, emergency assistance, and food distribution.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "note": "Sikeston Outreach Center per dss.mo.gov; LIHEAP: 573-931-8400. The previous 573-471-4426 is not listed on any official source."
     },
     {
       "id": "mo-child-care-aware",
       "name": "Child Care Aware of Missouri",
       "domain": ["children", "family"],
       "type": "referral",
-      "phone": "1-866-892-3228",
-      "website": "mo.childcareaware.org",
+      "phone": "573-415-8605",
+      "website": "mochildcareaware.org",
       "coverage": "statewide",
       "population": ["families_with_children"],
       "cost": "free",
       "description": "Statewide child care resource and referral. Helps families find quality child care and navigate subsidy applications.",
-      "verified": "2026-03-28"
-    },
-    {
-      "id": "kc-legal-aid",
-      "name": "Kansas City Volunteer Lawyers and Accountants for the Arts",
-      "domain": ["legal", "immigration"],
-      "type": "legal_aid",
-      "phone": "816-474-6750",
-      "coverage": "kc_metro",
-      "counties": ["Jackson", "Clay", "Platte"],
-      "population": ["low_income", "immigrants"],
-      "cost": "free",
-      "description": "Pro bono immigration legal services and general civil legal aid in the Kansas City metro area.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18",
+      "hours": "Mon-Fri 6:30am-8:30pm; Sat 8am-noon"
     },
     {
       "id": "stl-immigration-ils",
@@ -740,7 +720,8 @@
       "population": ["immigrants"],
       "cost": "free",
       "description": "Refugee resettlement, immigration legal services, ESL classes, employment services, and citizenship assistance.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS CALL: 314-773-9090 could not be confirmed on iistl.org (contact page blocked automated checks)."
     },
     {
       "id": "kc-shelter-restart",
@@ -754,8 +735,8 @@
       "counties": ["Jackson"],
       "population": ["homeless"],
       "cost": "free",
-      "description": "Emergency shelter, transitional housing, and rapid rehousing for individuals and families in Kansas City.",
-      "verified": "2026-03-28"
+      "description": "Emergency shelter and interim housing in downtown Kansas City for single adults, families with children, youth (ages 18-24 transitional living) and veterans, plus outreach, case management and permanent housing support.",
+      "verified": "2026-10-18"
     },
     {
       "id": "stl-ha-county",
@@ -763,13 +744,13 @@
       "domain": ["housing"],
       "type": "housing_authority",
       "phone": "314-428-3200",
-      "website": "haslc.com",
       "coverage": "stl_metro",
       "counties": ["St. Louis County"],
       "population": ["low_income"],
       "cost": "income_based",
       "description": "Public housing and Housing Choice Voucher (Section 8) program for St. Louis County residents.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS REVIEW: the previous website haslc.com appears to belong to another agency. HUD lists Housing Authority of St. Louis County (MO004), 8865 Natural Bridge Rd, email domain countyhousing.org. Confirm phone and website."
     },
     {
       "id": "kc-ha",
@@ -783,7 +764,8 @@
       "population": ["low_income"],
       "cost": "income_based",
       "description": "Public housing and Housing Choice Voucher program for Kansas City residents.",
-      "verified": "2026-03-28"
+      "verified": "2026-03-28",
+      "note": "NEEDS CALL: HUD lists 816-968-4100 and 816-968-4110 for this agency without saying which is the fax. Confirm on hakc.org."
     },
     {
       "id": "mo-job-centers",
@@ -796,7 +778,7 @@
       "population": ["all"],
       "cost": "free",
       "description": "WIOA employment services: job matching, resume help, interview prep, training referrals. 30+ locations statewide.",
-      "verified": "2026-03-28"
+      "verified": "2026-10-18"
     },
     {
       "id": "mid-mo-vac",
@@ -809,8 +791,8 @@
       "counties": ["Boone"],
       "population": ["low_income"],
       "cost": "free",
-      "description": "Emergency assistance, food pantry, rent/utility help, and budget counseling in Columbia/Boone County.",
-      "verified": "2026-03-28"
+      "description": "Basic-needs help in Columbia/Boone County: emergency food pantry, rent/mortgage help when funds allow, prescriptions, ID documents, baby supplies, gas vouchers, and the Waypoint emergency shelter. Does not provide utility or hotel/motel assistance.",
+      "verified": "2026-10-18"
     }
   ]
 }
