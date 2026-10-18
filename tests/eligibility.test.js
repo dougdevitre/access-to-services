@@ -60,7 +60,7 @@ const PROGRAMS = [
   { name: "Medicaid (Adult)", income: 138, pop: "adults", domain: "healthcare" },
   { name: "Medicaid (Children)", income: 300, pop: "children", domain: "healthcare" },
   { name: "TANF", income: 50, pop: "families_with_children", domain: "financial" },
-  { name: "Child Care Subsidy", income: 185, pop: "families_with_children", domain: "childcare" },
+  { name: "Child Care Subsidy", income: 150, pop: "families_with_children", domain: "childcare" },
   { name: "LIHEAP", income: 150, pop: "all", domain: "utilities" },
   { name: "School Meals (Free)", income: 130, pop: "school_age", domain: "food" },
   { name: "School Meals (Reduced)", income: 185, pop: "school_age", domain: "food" },

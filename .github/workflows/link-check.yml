@@ -1,0 +1,100 @@
+name: Link check
+
+# Checks every external link with lychee, so a dead hotline page, a moved
+# government form or a renamed agency site is caught instead of being handed
+# to someone who needs it.
+#   - pull requests that touch the docs, data or skill: fails on a broken link
+#   - monthly schedule (and manual runs): opens or updates one issue instead of failing silently
+# Most links here are bare domains ("stlfoodbank.org"), which lychee does not
+# detect on its own, so the "Collect links" step turns them into https:// URLs:
+# the `website` fields of mo-resources.json, plus bare domains in the docs and in
+# the Markdown inside access-to-services.skill (the packaged skill Claude loads).
+# Exclusions (tel: links, bot-blocking sites, placeholders) live in .lycheeignore,
+# each with a comment saying why.
+on:
+  pull_request:
+    paths:
+      - "**/*.md"
+      - "mo-resources.json"
+      - "access-to-services.skill"
+      - "intake-app.jsx"
+      - ".lycheeignore"
+      - ".github/workflows/link-check.yml"
+  schedule:
+    - cron: "23 9 1 * *" # 09:23 UTC on the 1st of each month
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: link-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lychee:
+    name: Check external links
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Collect links
+        run: |
+          mkdir -p lychee/skill
+          tar -xzf access-to-services.skill -C lychee/skill
+          jq -r '.resources[].website // empty | "https://" + .' mo-resources.json > lychee/resource-websites.txt
+          # Bare domains (no scheme) in the docs, the app and the skill's Markdown.
+          grep -rhoE '(^|[^/@.a-zA-Z0-9-])([a-zA-Z0-9-]+\.)+(gov|org|com|net|us|edu)(/[A-Za-z0-9._~/?#=&%-]*[A-Za-z0-9/_-])?' \
+              --include='*.md' --include='*.jsx' --exclude-dir=lychee --exclude-dir=.git . lychee/skill \
+            | sed -E 's#^[^a-zA-Z0-9]##' \
+            | grep -vE '^(d\.edu|q\.edu|s\.com)$' \
+            | sort -u | sed 's#^#https://#' > lychee/bare-domains.txt
+          wc -l lychee/*.txt
+
+      - name: Run lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          # 429 (rate limited) is accepted so a busy site does not read as dead;
+          # a real 404/410/5xx or a dead domain still fails.
+          args: >-
+            --no-progress
+            --max-concurrency 8
+            --max-retries 3
+            --timeout 30
+            --accept 200..=299,429
+            --exclude-loopback
+            './**/*.md'
+            'lychee/*.txt'
+          output: lychee/report.md
+          fail: false
+          jobSummary: true
+
+      - name: Fail the pull request on broken links
+        if: github.event_name == 'pull_request' && steps.lychee.outputs.exit_code != '0'
+        run: |
+          echo "::error::lychee found broken links. The job summary lists each one."
+          exit 1
+
+      - name: Open or update the link-check issue
+        if: github.event_name != 'pull_request' && steps.lychee.outputs.exit_code != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Link check: broken links found"
+          {
+            echo "The scheduled link check found broken links ([run]($RUN_URL))."
+            echo "Fix or replace each link, or add a commented exclusion to \`.lycheeignore\` if the site only blocks bots."
+            echo
+            cat lychee/report.md
+          } > lychee/issue.md
+          number="$(gh issue list --state open --search "\"$title\" in:title" --json number --jq '.[0].number // empty')"
+          if [ -n "$number" ]; then
+            gh issue comment "$number" --body-file lychee/issue.md
+          else
+            gh issue create --title "$title" --body-file lychee/issue.md
+          fi
