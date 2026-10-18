@@ -20,7 +20,9 @@ if (!enMatch) {
   process.exit(1);
 }
 
-const keyPattern = /["']?([\w.]+)["']?\s*:/g;
+// Keys start a line; anchoring avoids treating "Word:" inside a translated value
+// (e.g. "DV Hotline: 1-800-...") as a key.
+const keyPattern = /^\s*["']?([\w.]+)["']?\s*:/gm;
 const enKeys = new Set();
 let match;
 while ((match = keyPattern.exec(enMatch[1])) !== null) {
@@ -37,7 +39,7 @@ while ((langMatch = langPattern.exec(content)) !== null) {
   if (lang === "en") continue;
 
   const langKeys = new Set();
-  const langKeyPattern = /["']?([\w.]+)["']?\s*:/g;
+  const langKeyPattern = /^\s*["']?([\w.]+)["']?\s*:/gm;
   let km;
   while ((km = langKeyPattern.exec(langMatch[2])) !== null) {
     langKeys.add(km[1]);
