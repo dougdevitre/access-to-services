@@ -222,7 +222,7 @@ The tool auto-matches flagged domains to resources based on the client's county:
 
 ---
 
-## Benefits Eligibility (2025 FPL)
+## Benefits Eligibility (2026 FPL)
 
 ```
 FPL %    0%        50%       100%      130%  138%     185%       300%

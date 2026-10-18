@@ -28,25 +28,25 @@ function section(name) {
 // ============================================================
 // FPL Calculations
 // ============================================================
-section("FPL 2025 Calculations");
+section("FPL 2026 Calculations");
 
-const FPL_2025 = { 1: 15650, 2: 21150, 3: 26650, 4: 32150, 5: 37650, 6: 43150, 7: 48650, 8: 54150 };
-const fplFor = (size) => FPL_2025[Math.min(size, 8)] + Math.max(0, size - 8) * 5500;
+const FPL_2026 = { 1: 15960, 2: 21640, 3: 27320, 4: 33000, 5: 38680, 6: 44360, 7: 50040, 8: 55720 };
+const fplFor = (size) => FPL_2026[Math.min(size, 8)] + Math.max(0, size - 8) * 5680;
 const fplPct = (income, size) => Math.round((income * 12 / fplFor(size)) * 100);
 
-assert(fplFor(1) === 15650, "FPL for household of 1 = $15,650");
-assert(fplFor(4) === 32150, "FPL for household of 4 = $32,150");
-assert(fplFor(8) === 54150, "FPL for household of 8 = $54,150");
-assert(fplFor(9) === 59650, "FPL for household of 9 = $59,650 (8 + $5,500)");
-assert(fplFor(10) === 65150, "FPL for household of 10 = $65,150 (8 + 2×$5,500)");
+assert(fplFor(1) === 15960, "FPL for household of 1 = $15,960");
+assert(fplFor(4) === 33000, "FPL for household of 4 = $33,000");
+assert(fplFor(8) === 55720, "FPL for household of 8 = $55,720");
+assert(fplFor(9) === 61400, "FPL for household of 9 = $61,400 (8 + $5,680)");
+assert(fplFor(10) === 67080, "FPL for household of 10 = $67,080 (8 + 2×$5,680)");
 
-assert(fplPct(1304, 1) === 100, "HH1 earning $1,304/mo = 100% FPL");
+assert(fplPct(1330, 1) === 100, "HH1 earning $1,330/mo = 100% FPL");
 assert(fplPct(0, 1) === 0, "HH1 earning $0/mo = 0% FPL");
-assert(fplPct(2679, 4) === 100, "HH4 earning $2,679/mo = 100% FPL");
-assert(fplPct(1696, 1) === 130, "HH1 earning $1,696/mo = 130% FPL (SNAP threshold)");
+assert(fplPct(2750, 4) === 100, "HH4 earning $2,750/mo = 100% FPL");
+assert(fplPct(1729, 1) === 130, "HH1 earning $1,729/mo = 130% FPL (SNAP threshold)");
 
 // Edge cases
-assert(fplPct(1000, 1) === 77, "HH1 earning $1,000/mo = 77% FPL");
+assert(fplPct(1000, 1) === 75, "HH1 earning $1,000/mo = 75% FPL");
 assert(!isNaN(fplPct(0, 1)), "Zero income produces a valid number");
 
 // ============================================================
