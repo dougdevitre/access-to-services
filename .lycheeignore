@@ -1,0 +1,6 @@
+# Exclusions for the Link check workflow (.github/workflows/link-check.yml).
+# One regular expression per line. Every entry says why it is skipped.
+
+# tel: and sms: links are phone numbers, not web pages, so there is nothing to fetch.
+^tel:
+^sms:

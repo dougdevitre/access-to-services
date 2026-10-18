@@ -391,10 +391,10 @@
       "coverage": "statewide",
       "population": ["seniors"],
       "cost": "free",
-      "description": "Prescription drug assistance program for Missouri seniors.",
+      "description": "State pharmacy assistance for people who have both Medicare and MO HealthNet; they are enrolled automatically and MoRx helps with Part D drug costs.",
       "verified": "2026-03-28",
       "website": "dss.mo.gov/mhd/morx-general-faqs",
-      "note": "NEEDS CALL: 1-800-375-1406 appears on the state toll-free list (mocor.mo.gov) but not on current DSS MoRx pages. SenioRx is no longer the program name."
+      "note": "NEEDS CALL: 1-800-375-1406 appears on the state toll-free list (mocor.mo.gov) but not on current DSS MoRx pages, which give no participant phone. Eligibility per dss.mo.gov MoRx FAQs (2026-10-18). SenioRx is no longer the program name."
     },
     {
       "id": "nat-eldercare",
@@ -506,17 +506,20 @@
     },
     {
       "id": "stl-shelter-gateway",
-      "name": "Gateway Homeless Services (Peter & Paul)",
+      "name": "Gateway180",
       "domain": ["housing"],
       "type": "shelter",
       "phone": "314-231-1515",
+      "phone_alt": "314-802-5444",
+      "website": "gateway180.org",
+      "address": "1000 N 19th St, St. Louis, MO 63106",
       "coverage": "stl_metro",
       "counties": ["St. Louis City"],
-      "population": ["homeless"],
+      "population": ["homeless", "families_with_children"],
       "cost": "free",
-      "description": "Emergency shelter for single adults and families experiencing homelessness in St. Louis City.",
-      "verified": "2026-03-28",
-      "note": "NEEDS REVIEW: this entry mixes two organizations. 314-231-1515 is reported as Gateway180 (women, children, families; 1000 N 19th St). Peter & Paul Community Services (ppcsinc.org) runs a referral-only shelter for single men via 211 or St. Patrick Center. The listed address matched neither and was removed."
+      "description": "Homeless shelter in St. Louis focused on women, children and families.",
+      "verified": "2026-10-18",
+      "note": "Phone, Housing Resource Hotline (phone_alt) and address per gateway180.org/contact. Single men: Peter & Paul Community Services runs a referral-only shelter; call 211 or go to the St. Patrick Center (ppcsinc.org)."
     },
     {
       "id": "kc-shelter-city-union",
@@ -611,31 +614,30 @@
       "name": "Preferred Family Healthcare",
       "domain": ["substance_use", "mental_health"],
       "type": "sud_treatment",
-      "phone": "1-800-731-3070",
+      "phone": "660-665-1962",
       "website": "pfh.org",
       "coverage": "statewide",
       "population": ["all"],
       "cost": "sliding_scale",
       "insurance": ["medicaid", "medicare", "private", "uninsured"],
-      "description": "Statewide SUD and mental health treatment provider with 80+ locations. Offers detox, residential, outpatient, and MAT.",
+      "description": "Missouri provider of addiction recovery, mental health, behavioral crisis and integrated care services at locations across the state.",
       "verified": "2026-03-28",
-      "note": "NEEDS CALL: 1-800-731-3070 is not listed on pfh.org (HQ 660-665-1962). Site now reads 'Preferred Family Health'."
+      "note": "NEEDS CALL: the phone is the Kirksville headquarters line on pfh.org/contact; confirm an intake number. The former 1-800-731-3070 is not on pfh.org. Site now reads 'Preferred Family Health'; its parent Brightli merged with Centerstone in 2025."
     },
     {
       "id": "stl-sud-ncada",
-      "name": "NCADA (National Council on Alcoholism & Drug Abuse — St. Louis)",
+      "name": "PreventEd (formerly NCADA St. Louis)",
       "domain": ["substance_use"],
-      "type": "sud_treatment",
+      "type": "prevention",
       "phone": "314-962-3456",
-      "website": "ncada-stl.org",
+      "website": "prevented.org",
+      "address": "9355 Olive Blvd, St. Louis, MO 63132",
       "coverage": "stl_metro",
       "counties": ["St. Louis City", "St. Louis County"],
       "population": ["all"],
-      "cost": "sliding_scale",
-      "insurance": ["medicaid", "private", "uninsured"],
-      "description": "Substance use assessment, education, outpatient treatment, and recovery support in the St. Louis area.",
-      "verified": "2026-03-28",
-      "note": "NEEDS REVIEW: NCADA-St. Louis appears to operate as PreventEd (prevented.org) and focuses on prevention and early intervention, not treatment. Name, phone, website and type unconfirmed."
+      "description": "Alcohol and drug prevention, self-screening and referral, peer recovery support, and naloxone (Narcan) requests and training in the St. Louis area. Not a treatment provider; for treatment use findtreatment.gov.",
+      "verified": "2026-10-18",
+      "note": "Phone and address per prevented.org/contact-us; same phone as the former NCADA listing. Offices also in Franklin and Lincoln counties."
     },
     {
       "id": "mo-reentry-coalition",
@@ -655,14 +657,17 @@
       "name": "Keyway Center for Diversion and Reentry (formerly Center for Women in Transition)",
       "domain": ["reentry", "employment", "housing"],
       "type": "reentry",
-      "phone": "314-588-8300",
+      "phone": "314-771-5207",
+      "website": "keywaycenter.org",
+      "address": "5017 Washington Pl, Suite 202, St. Louis, MO 63108",
+      "hours": "Mon-Fri 9am-5pm",
       "coverage": "stl_metro",
       "counties": ["St. Louis City", "St. Louis County"],
       "population": ["justice_involved"],
       "cost": "free",
-      "description": "Reentry services for women: housing, employment, case management, and family reunification.",
-      "verified": "2026-03-28",
-      "note": "NEEDS CALL: renamed in 2022 (National Institute of Corrections). Phone 314-588-8300 and address unconfirmed; check keywaycenter.org."
+      "description": "Reentry services for justice-involved women and transgender people 18+: case management, transitional and supportive housing, behavioral health and recovery support, and job readiness and placement.",
+      "verified": "2026-10-18",
+      "note": "Phone, address and hours per keywaycenter.org and the City of St. Louis reentry page (stlouis-mo.gov). The previous 314-588-8300 is not listed."
     },
     {
       "id": "mid-mo-caa",
@@ -721,7 +726,7 @@
       "cost": "free",
       "description": "Refugee resettlement, immigration legal services, ESL classes, employment services, and citizenship assistance.",
       "verified": "2026-03-28",
-      "note": "NEEDS CALL: 314-773-9090 could not be confirmed on iistl.org (contact page blocked automated checks)."
+      "note": "NEEDS CALL: iistl.org blocks automated checks. Phone and address match the Institute's own program flier (2022, hosted at racstl.org) but not a current page."
     },
     {
       "id": "kc-shelter-restart",
@@ -740,17 +745,18 @@
     },
     {
       "id": "stl-ha-county",
-      "name": "St. Louis County Housing Authority",
+      "name": "Housing Authority of St. Louis County",
       "domain": ["housing"],
       "type": "housing_authority",
       "phone": "314-428-3200",
+      "website": "countyhousing.org",
+      "address": "8865 Natural Bridge Rd, St. Louis, MO 63121",
       "coverage": "stl_metro",
       "counties": ["St. Louis County"],
       "population": ["low_income"],
       "cost": "income_based",
       "description": "Public housing and Housing Choice Voucher (Section 8) program for St. Louis County residents.",
-      "verified": "2026-03-28",
-      "note": "NEEDS REVIEW: the previous website haslc.com appears to belong to another agency. HUD lists Housing Authority of St. Louis County (MO004), 8865 Natural Bridge Rd, email domain countyhousing.org. Confirm phone and website."
+      "verified": "2026-10-18"
     },
     {
       "id": "kc-ha",
@@ -759,13 +765,14 @@
       "type": "housing_authority",
       "phone": "816-968-4100",
       "website": "hakc.org",
+      "address": "3822 Summit St, Kansas City, MO 64111",
       "coverage": "kc_metro",
       "counties": ["Jackson"],
       "population": ["low_income"],
       "cost": "income_based",
       "description": "Public housing and Housing Choice Voucher program for Kansas City residents.",
-      "verified": "2026-03-28",
-      "note": "NEEDS CALL: HUD lists 816-968-4100 and 816-968-4110 for this agency without saying which is the fax. Confirm on hakc.org."
+      "verified": "2026-10-18",
+      "note": "Main line per hakc.org; 816-968-4110 is the fax."
     },
     {
       "id": "mo-job-centers",

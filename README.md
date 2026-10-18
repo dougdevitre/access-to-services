@@ -77,7 +77,7 @@ Collects household composition, income, geography, and special circumstances to 
 │  │ HH Size: 4   │  │ Income: $2,400/mo  │  │
 │  └──────────────┘  └─────────────────────┘  │
 │  ┌──────────────────────────────────────┐   │
-│  │ 90% FPL — Likely Medicaid + SNAP     │   │
+│  │ 87% FPL — Likely Medicaid + SNAP     │   │
 │  └──────────────────────────────────────┘   │
 │                                              │
 │  Special Circumstances                       │
@@ -120,7 +120,7 @@ Each domain uses a plain-language screening question appropriate for direct clie
 ┌─────────────────────────────────────────────┐
 │  ┌────────┐ ┌────────┐ ┌────────┐ ┌──────┐ │
 │  │ Score  │ │ Crisis │ │Concern │ │ FPL  │ │
-│  │ 12/28  │ │   2    │ │   3    │ │ 90%  │ │
+│  │ 12/28  │ │   2    │ │   3    │ │ 87%  │ │
 │  └────────┘ └────────┘ └────────┘ └──────┘ │
 │                                              │
 │  ⚠ CRISIS: Housing, Safety                  │
@@ -146,7 +146,7 @@ The tool auto-matches flagged domains to resources based on the client's county:
 │                                                          │
 │  Housing (CRISIS)                                        │
 │  ┌──────────────────────────────────────────────────┐   │
-│  │ Gateway Homeless Services  314-231-1515           │   │
+│  │ Gateway180                 314-231-1515           │   │
 │  │                            [+ Refer] [Call Script]│   │
 │  ├──────────────────────────────────────────────────┤   │
 │  │ STL Housing Authority      314-531-4770           │   │
@@ -185,14 +185,14 @@ The tool auto-matches flagged domains to resources based on the client's county:
 │   housing. Can I do a warm handoff?"         │
 │                                              │
 │  2. Introduce the Client                     │
-│  "[Client], I have Gateway Homeless Services │
+│  "[Client], I have Gateway180                │
 │   on the line. They can help with housing.   │
 │   Is it okay if I introduce you?"            │
 │                                              │
 │  Resource Details                            │
-│  Organization: Gateway Homeless Services     │
+│  Organization: Gateway180                    │
 │  Phone: 314-231-1515                         │
-│  Address: 1419 N 11th St, St. Louis 63106   │
+│  Address: 1000 N 19th St, St. Louis 63106   │
 │                                              │
 │  3. After the Call                           │
 │  • Document the referral in case notes       │
@@ -251,7 +251,7 @@ Med Kids │■■■■■■■■■■■■■■■■■■■■■■�
 
 ## Resource Directory
 
-`mo-resources.json` contains **55 Missouri social service resources**. 47 were verified against official sources on 2026-10-18; the rest carry a `note` saying what still needs a phone check. Entries follow a structured schema ([SCHEMA.md](SCHEMA.md)).
+`mo-resources.json` contains **55 Missouri social service resources**. 52 were verified against official sources on 2026-10-18; the other 3 carry a `note` saying what still needs a phone check. Entries follow a structured schema ([SCHEMA.md](SCHEMA.md)).
 
 ### Geographic Coverage
 
@@ -376,7 +376,7 @@ immigration     ████                        2
                        v
               ┌────────────────┐
               │  FPL Calculator │  Income × 12 ÷ FPL threshold
-              │  (2025 values)  │  for household size
+              │  (2026 values)  │  for household size
               └───────┬────────┘
                       │
           ┌───────────┼───────────┐
