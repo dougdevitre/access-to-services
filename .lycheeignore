@@ -4,3 +4,18 @@
 # tel: and sms: links are phone numbers, not web pages, so there is nothing to fetch.
 ^tel:
 ^sms:
+
+# iistl.org (International Institute of St. Louis) refuses automated requests
+# (HTTP 500 to GitHub runners; robots rules block fetchers). Its listing in
+# mo-resources.json is flagged NEEDS CALL for a human to confirm instead.
+^https?://(www\.)?iistl\.org
+
+# pr.mo.gov (Missouri Division of Professional Registration) loads in browsers,
+# but its certificate chain is not trusted by lychee's TLS stack. Checked by hand
+# on 2026-10-18.
+^https?://pr\.mo\.gov
+
+# TEMPORARY: the Access To hub (dougdevitre.org) returned 404 to the link check
+# on 2026-10-18. It is the hub's own site, not a resource for clients; it is
+# reported to the hub's maintainer. Remove this line once the hub serves again.
+^https?://(www\.)?dougdevitre\.org
