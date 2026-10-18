@@ -246,7 +246,7 @@ Med Kids │■■■■■■■■■■■■■■■■■■■■■■�
 
 ## Resource Directory
 
-`mo-resources.json` contains **55 Missouri social service resources**. 47 were verified against official sources on 2026-10-18; the rest carry a `note` saying what still needs a phone check following a structured schema ([SCHEMA.md](SCHEMA.md)).
+`mo-resources.json` contains **55 Missouri social service resources**. 47 were verified against official sources on 2026-10-18; the rest carry a `note` saying what still needs a phone check. Entries follow a structured schema ([SCHEMA.md](SCHEMA.md)).
 
 ### Geographic Coverage
 
