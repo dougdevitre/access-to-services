@@ -58,14 +58,15 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
         with:
-          # 429 (rate limited) is accepted so a busy site does not read as dead;
-          # a real 404/410/5xx or a dead domain still fails.
+          # 403 and 429 are accepted: many .gov and nonprofit sites refuse or
+          # rate-limit GitHub-hosted bots, and a bot block is not a dead link.
+          # 404, 410, DNS/connection errors and repeated 5xx still fail.
           args: >-
             --no-progress
             --max-concurrency 8
             --max-retries 3
-            --timeout 30
-            --accept 200..=299,429
+            --timeout 20
+            --accept 200..=299,403,429
             --exclude-loopback
             './**/*.md'
             'lychee/*.txt'
@@ -76,7 +77,10 @@ jobs:
       - name: Fail the pull request on broken links
         if: github.event_name == 'pull_request' && steps.lychee.outputs.exit_code != '0'
         run: |
-          echo "::error::lychee found broken links. The job summary lists each one."
+          # One annotation listing every failure, so it is readable from the checks API too.
+          list="$(grep -E '^\* \[' lychee/report.md | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}')"
+          [ -n "$list" ] || list="$(sed 's/%/%25/g' lychee/report.md | head -200 | awk '{printf "%s%%0A", $0}')"
+          echo "::error title=Broken links::${list}"
           exit 1
 
       - name: Open or update the link-check issue
