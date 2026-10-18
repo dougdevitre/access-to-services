@@ -4,7 +4,7 @@
 
 > Part of **[Access To](https://dougdevitre.org)** — open-source tools for the access gaps that matter most. [See all projects →](https://dougdevitre.org/#pillars)
 
-Screen clients across 14 SDOH domains, estimate benefits eligibility, auto-match to 58+ verified local resources, track referral outcomes, and monitor client progress over time — in English and Spanish.
+Screen clients across 14 SDOH domains, estimate benefits eligibility, auto-match to 55 local resources checked against official sources, track referral outcomes, and monitor client progress over time — in English and Spanish.
 
 Built as a [Claude skill](https://docs.anthropic.com) with an interactive React UI component.
 
@@ -246,7 +246,7 @@ Med Kids │■■■■■■■■■■■■■■■■■■■■■■�
 
 ## Resource Directory
 
-`mo-resources.json` contains **58 verified Missouri social service resources** following a structured schema ([SCHEMA.md](SCHEMA.md)).
+`mo-resources.json` contains **55 Missouri social service resources**. 47 were verified against official sources on 2026-10-18; the rest carry a `note` saying what still needs a phone check following a structured schema ([SCHEMA.md](SCHEMA.md)).
 
 ### Geographic Coverage
 
@@ -355,7 +355,7 @@ immigration     ████                        2
 │  ┌─────────────┐    ┌──────────┐    ┌────────────────────────┐  │
 │  │  i18n.js    │    │mo-resour-│    │ access-to-services     │  │
 │  │  EN / ES    │    │ces.json  │    │ .skill (Claude skill)  │  │
-│  └─────────────┘    │ 58 orgs  │    └────────────────────────┘  │
+│  └─────────────┘    │ 55 orgs  │    └────────────────────────┘  │
 │                      └──────────┘                                │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -424,7 +424,7 @@ access-to-services/
 ├── referral-tracker.js         # Referral status management & follow-up
 ├── client-history.js           # Client screening history & comparison
 ├── i18n.js                     # English + Spanish translations (130+ strings)
-├── mo-resources.json           # Verified Missouri resource directory (58 entries)
+├── mo-resources.json           # Verified Missouri resource directory (55 entries)
 ├── mo-resources.schema.json    # JSON Schema for resource validation
 ├── access-to-services.skill    # Claude skill definition
 ├── SCHEMA.md                   # Human-readable schema & query guide
