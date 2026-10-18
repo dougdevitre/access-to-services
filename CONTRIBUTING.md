@@ -65,6 +65,7 @@ cd access-to-services
 1. Run validation: `node scripts/validate.js`
 2. Run tests: `node tests/eligibility.test.js`
 3. Test any JSX changes in a React environment
+4. Rebuild the skill package whenever its sources change (`mo-resources.json`, `SCHEMA.md` or `eval-results.md`): run `bash scripts/build-skill.sh` and commit `access-to-services.skill`. Claude loads the package, not the repo, and CI fails if it is stale.
 
 ### Code Style
 
