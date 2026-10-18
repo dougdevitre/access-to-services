@@ -19,3 +19,12 @@
 # on 2026-10-18. It is the hub's own site, not a resource for clients; it is
 # reported to the hub's maintainer. Remove this line once the hub serves again.
 ^https?://(www\.)?dougdevitre\.org
+
+# childwelfare.gov (Child Welfare Information Gateway) returns 404 to the link
+# checker for every URL, including the home page, while the page loads for a
+# browser-like fetch (checked 2026-10-18). Bot filtering, not a dead site.
+^https?://(www\.)?childwelfare\.gov
+
+# naswmo.socialworkers.org (NASW Missouri Chapter) resets connections from
+# GitHub runners; the page loads normally (checked 2026-10-18).
+^https?://naswmo\.socialworkers\.org
