@@ -25,6 +25,9 @@ jobs:
       - name: Check FPL year
         run: node scripts/check-fpl-year.js
 
+      - name: Check the skill package is up to date
+        run: bash scripts/build-skill.sh --check
+
   label:
     runs-on: ubuntu-latest
     permissions:
