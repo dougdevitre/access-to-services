@@ -28,3 +28,10 @@
 # naswmo.socialworkers.org (NASW Missouri Chapter) resets connections from
 # GitHub runners; the page loads normally (checked 2026-10-18).
 ^https?://naswmo\.socialworkers\.org
+
+# epa.gov (US EPA) home page: lychee on the GitHub runner reports "SSL
+# certificate not trusted" for both https://epa.gov/ and https://www.epa.gov/
+# (PR #11, 2026-10-20), while www.epa.gov pages load for a normal fetch
+# (https://www.epa.gov/about, checked 2026-10-20). A certificate-chain problem,
+# not a dead page. Remove once the link check accepts the certificate again.
+^https?://(www\.)?epa\.gov/?$
