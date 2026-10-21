@@ -431,7 +431,7 @@ access-to-services/
 ├── i18n.js                     # English + Spanish translations (130+ strings)
 ├── mo-resources.json           # Verified Missouri resource directory (55 entries)
 ├── mo-resources.schema.json    # JSON Schema for resource validation
-├── access-to-services.skill    # Claude skill definition
+├── access-to-services.skill    # Skill sources (gzipped tar; the install zip is built from it)
 ├── SCHEMA.md                   # Human-readable schema & query guide
 ├── eval-results.md             # Skill routing evaluation (15 test cases)
 ├── scripts/
@@ -454,7 +454,21 @@ access-to-services/
 ## Quick Start
 
 ### As a Claude Skill
-The `access-to-services.skill` file is loaded directly by Claude. When active, it provides SDOH screening, benefits guidance, crisis triage, and referral generation backed by the resource directory.
+
+Add Access to Services to Claude at [claude.ai](https://claude.ai) in a few clicks. It works on the Free, Pro, Max, Team and Enterprise plans. When active, it provides SDOH screening, benefits guidance, crisis triage, and referral generation.
+
+1. **Download the install file:** [access-to-services.zip](https://github.com/dougdevitre/access-to-services/releases/download/skill-latest/access-to-services.zip)
+2. **Don't unzip it.** Claude needs the `.zip` file just as it downloaded.
+3. **Turn on code execution.** Skills need it.
+   - **Free, Pro or Max:** open **Settings > Capabilities** and turn on **Code execution and file creation**.
+   - **Team or Enterprise:** an organization owner opens **Organization settings > Plugins & skills**, clicks the **Policy** tab, and turns on both **Code execution and file creation** and **Skills**.
+4. **Upload it:** open **Customize > Skills**, click **+**, then **+ Create skill**, then **Upload a skill**, and choose `access-to-services.zip`.
+5. **Turn it on:** in **Customize > Skills**, switch on **access-to-services**. Claude will now use it for any social services question.
+
+These steps come from Claude's help center: [Use Skills in Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+If the link 404s, the first release hasn't been published yet.
+
+Don't upload `access-to-services.skill` itself: it is a gzipped tarball, and claude.ai only takes a `.zip`. It holds the skill sources; `scripts/build-skill-zip.sh` extracts it and builds the same install file into `dist/`, and the Skill package workflow republishes it on every change to `main`.
 
 ### Embedding the React Component
 
