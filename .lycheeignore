@@ -35,3 +35,8 @@
 # (https://www.epa.gov/about, checked 2026-10-20). A certificate-chain problem,
 # not a dead page. Remove once the link check accepts the certificate again.
 ^https?://(www\.)?epa\.gov/?$
+
+# The install file is published by .github/workflows/skill-package.yml when this
+# change reaches main, so it 404s until the first skill-latest release exists.
+# TEMPORARY: remove this line once the release is published.
+^https://github\.com/dougdevitre/access-to-services/releases/download/skill-latest/
