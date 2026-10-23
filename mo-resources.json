@@ -252,13 +252,15 @@
       "domain": ["food", "healthcare", "financial", "children"],
       "type": "government",
       "phone": "1-855-373-4636",
+      "phone_alt": "855-373-9994",
       "website": "mydss.mo.gov",
       "hours": "Mon-Fri 8:00 a.m.-5:00 p.m.",
       "coverage": "statewide",
       "population": ["all"],
       "cost": "free",
       "description": "SNAP, TANF, Medicaid, child care subsidy, energy assistance applications and case management.",
-      "verified": "2026-10-18"
+      "verified": "2026-10-23",
+      "note": "phone is the FSD Info Line (dss.mo.gov/dss_map). phone_alt is the number to apply for MO HealthNet (Medicaid) by phone (mydss.mo.gov/healthcare/apply)."
     },
     {
       "id": "mo-first-steps",
