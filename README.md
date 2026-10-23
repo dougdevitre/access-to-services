@@ -7,7 +7,7 @@
 
 **A Social Determinants of Health (SDOH) screening, referral, and follow-up tool for Missouri.**
 
-> Part of **[Access To](https://dougdevitre.org)** — open-source tools for the access gaps that matter most. [See all projects →](https://dougdevitre.org/#pillars)
+> Part of **[Access To](https://dougdevitre.org)** — open-source tools for the access gaps that matter most. [See all projects →](https://dougdevitre.org/about.html#pillars)
 
 Screen clients across 14 SDOH domains, estimate benefits eligibility, auto-match to 55 local resources checked against official sources, track referral outcomes, and monitor client progress over time — in English and Spanish.
 
