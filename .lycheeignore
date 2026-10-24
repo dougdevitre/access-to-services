@@ -30,3 +30,13 @@
 # (https://www.epa.gov/about, checked 2026-10-20). A certificate-chain problem,
 # not a dead page. Remove once the link check accepts the certificate again.
 ^https?://(www\.)?epa\.gov/?$
+
+# mocadsv.org is the Missouri Coalition Against Domestic and Sexual Violence's
+# own domain (mo-resources.json, id mo-coalition-dv). Its home page answers the
+# link checker with a 307 redirect that lychee does not follow (PR #21 run,
+# 2026-10-24: "[307] https://mocadsv.org/ Rejected status code"). Kept because it
+# is a statewide crisis and legal resource for survivors; never delete it to pass
+# this check. Check it by hand in a browser (GuideStar lists www.mocadsv.org as
+# the coalition's site) and remove this entry once the redirect target is
+# confirmed and the link updated. Scoped to the bare home page only.
+^https?://mocadsv\.org/?$
