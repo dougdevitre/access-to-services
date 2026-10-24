@@ -28,6 +28,20 @@ jobs:
       - name: Check the skill package is up to date
         run: bash scripts/build-skill.sh --check
 
+      # facts/ledger.json: every verified phone number, dollar figure, deadline
+      # and program-status claim, with its primary source and date. The skill's
+      # text lives only inside access-to-services.skill, so extract it first and
+      # point the check at the extracted access-to-services/ folder. Fails when
+      # a fact is past its recheck date, a listed file is missing, or the text
+      # no longer carries the ledger's value.
+      - name: Check the fact ledger
+        run: |
+          node --test scripts/test/check-facts.test.mjs
+          pkg="$RUNNER_TEMP/skill-package"
+          mkdir -p "$pkg"
+          tar -xzf access-to-services.skill -C "$pkg"
+          node scripts/check-facts.mjs --root "$pkg/access-to-services"
+
   label:
     runs-on: ubuntu-latest
     permissions:
