@@ -1,0 +1,578 @@
+{
+  "$comment": "Fact ledger: every phone number, dollar figure, deadline and program-status claim this skill states that was verified on its primary source, with the date and the package files that carry it. The skill's text lives inside access-to-services.skill, so files are paths inside the package's access-to-services/ folder; CI extracts the package and runs scripts/check-facts.mjs --root on it. The check fails when a fact is past its recheck date (verified_on + recheck_days, or recheck_on), a listed file is missing, or the value (or each string in match) no longer appears in its files. Recheck intervals: phone numbers 180 days; dollar figures and program status 90; annual-cycle figures use recheck_on with the next cycle's date. Directory entries in mo-resources.json keep their own per-entry verified dates (scripts/check-freshness.js) and are not repeated here. Never add a fact you have not verified yourself, and never back-date verified_on.",
+  "recheck_days_default": 90,
+  "facts": [
+    {
+      "id": "988-lifeline",
+      "claim": "988 Suicide & Crisis Lifeline: call or text 988, 24/7",
+      "value": "988",
+      "source": "https://988lifeline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "SKILL.md",
+        "README.md",
+        "references/crisis-resources.md",
+        "references/immigration-services.md",
+        "references/mental-health.md",
+        "references/mo-resources.md",
+        "references/output-formats.md",
+        "references/reentry-services.md",
+        "references/substance-use.md"
+      ]
+    },
+    {
+      "id": "988-spanish-options",
+      "claim": "988 in Spanish: call 988 and press 2, or text AYUDA to 988",
+      "value": "call 988 and press 2, or text AYUDA to 988",
+      "match": [
+        "press 2",
+        "AYUDA to 988"
+      ],
+      "source": "https://988lifeline.org/get-help/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "veterans-crisis-line",
+      "claim": "Veterans Crisis Line: call 988 and press 1, or text 838255",
+      "value": "988, press 1 / text 838255",
+      "match": [
+        "press 1",
+        "838255"
+      ],
+      "source": "https://988lifeline.org/get-help/what-to-expect/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/mental-health.md",
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "crisis-text-line",
+      "claim": "Crisis Text Line: text HOME to 741741",
+      "value": "HOME to 741741",
+      "source": "https://www.crisistextline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/mental-health.md",
+        "references/mo-resources.md",
+        "references/output-formats.md"
+      ]
+    },
+    {
+      "id": "crisis-text-line-spanish",
+      "claim": "Crisis Text Line in Spanish: text HOLA to 741741",
+      "value": "HOLA to 741741",
+      "source": "https://www.crisistextline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "ndvh-phone",
+      "claim": "National Domestic Violence Hotline, 24/7",
+      "value": "1-800-799-7233",
+      "source": "https://www.thehotline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/housing.md",
+        "references/immigration-services.md",
+        "references/know-your-rights.md",
+        "references/mo-resources.md",
+        "references/output-formats.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "ndvh-text",
+      "claim": "National Domestic Violence Hotline text line",
+      "value": "START to 88788",
+      "source": "https://www.thehotline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/know-your-rights.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "childhelp-hotline",
+      "claim": "Childhelp National Child Abuse Hotline, call or text, 24/7",
+      "value": "1-800-422-4453",
+      "source": "https://www.childhelphotline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/children-youth.md",
+        "references/crisis-resources.md",
+        "references/output-formats.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "mo-child-abuse-hotline",
+      "claim": "Missouri Child Abuse and Neglect Hotline, 24/7",
+      "value": "1-800-392-3738",
+      "source": "https://dss.mo.gov/cd/keeping-kids-safe/can.htm",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/children-youth.md",
+        "references/crisis-resources.md",
+        "references/mo-resources.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "mo-adult-abuse-hotline",
+      "claim": "Missouri Adult Abuse and Neglect Hotline",
+      "value": "1-800-392-0210",
+      "source": "https://health.mo.gov/report-adult-abuse/stop-adult-abuse",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/aging-services.md",
+        "references/crisis-resources.md",
+        "references/mo-resources.md",
+        "references/public-safety.md",
+        "references/staff-quickstart.md"
+      ]
+    },
+    {
+      "id": "mo-adult-abuse-hotline-hours",
+      "claim": "Missouri Adult Abuse and Neglect Hotline hours: 7 a.m.–8 p.m., seven days; online reports any time",
+      "value": "daily 7am–8pm",
+      "source": "https://health.mo.gov/report-adult-abuse/stop-adult-abuse",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "eldercare-locator-phone",
+      "claim": "Eldercare Locator",
+      "value": "1-800-677-1116",
+      "source": "https://eldercare.acl.gov/Public/About/Contact_Info/Index.aspx",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/aging-services.md",
+        "references/crisis-resources.md",
+        "references/mo-resources.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "eldercare-locator-hours",
+      "claim": "Eldercare Locator hours: Mon–Fri 8 a.m.–9 p.m. ET",
+      "value": "Mon–Fri 8am–9pm ET",
+      "source": "https://eldercare.acl.gov/Public/About/Contact_Info/Index.aspx",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "rainn-hotline",
+      "claim": "National Sexual Assault Hotline (RAINN)",
+      "value": "1-800-656-4673",
+      "source": "https://rainn.org/contact",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "trafficking-hotline",
+      "claim": "National Human Trafficking Hotline",
+      "value": "1-888-373-7888",
+      "source": "https://polarisproject.org/?p=836",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/immigration-services.md",
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "samhsa-helpline",
+      "claim": "SAMHSA National Helpline, 24/7",
+      "value": "1-800-662-4357",
+      "source": "https://www.samhsa.gov/find-help/helplines/national-helpline",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/mental-health.md",
+        "references/mo-resources.md",
+        "references/output-formats.md",
+        "references/substance-use.md"
+      ]
+    },
+    {
+      "id": "poison-help",
+      "claim": "Poison Help line",
+      "value": "1-800-222-1222",
+      "source": "https://poisonhelp.hrsa.gov/the-poison-help-line/index.html",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md",
+        "references/mo-resources.md",
+        "references/public-health.md"
+      ]
+    },
+    {
+      "id": "trevor-project-phone",
+      "claim": "Trevor Project, 24/7",
+      "value": "1-866-488-7386",
+      "source": "https://www.thetrevorproject.org/get-help/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "trevor-project-text",
+      "claim": "Trevor Project text line",
+      "value": "START to 678-678",
+      "source": "https://www.thetrevorproject.org/get-help/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "trans-lifeline-phone",
+      "claim": "Trans Lifeline (US); press 2 for Spanish",
+      "value": "1-877-565-8860",
+      "source": "https://translifeline.org/hotline/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "trans-lifeline-hours",
+      "claim": "Trans Lifeline hours: Mon–Fri 12–8 p.m. Central (1–9 p.m. Eastern)",
+      "value": "Mon–Fri, noon–8pm CT",
+      "source": "https://translifeline.org/hotline/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/crisis-resources.md"
+      ]
+    },
+    {
+      "id": "stronghearts-helpline",
+      "claim": "StrongHearts Native Helpline, 24/7",
+      "value": "1-844-762-8483",
+      "source": "https://strongheartshelpline.org/for-supporters",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "dod-safe-helpline",
+      "claim": "DoD Safe Helpline, 24/7",
+      "value": "1-877-995-5247",
+      "source": "https://safehelpline.org/about",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/public-safety.md"
+      ]
+    },
+    {
+      "id": "hud-housing-counseling",
+      "claim": "HUD housing counseling line",
+      "value": "1-800-569-4287",
+      "source": "https://www.hud.gov/stat/sfh/housing-counseling",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/housing.md",
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "mo-ship-phone",
+      "claim": "Missouri SHIP (Medicare counseling)",
+      "value": "1-800-390-3330",
+      "source": "https://www.cms.gov/contacts/missouri-ship/general-beneficiary-contact/1562121",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/aging-services.md",
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "ssa-national-number",
+      "claim": "Social Security national toll-free number",
+      "value": "1-800-772-1213",
+      "source": "https://www.ssa.gov/agency/contact/phone.html",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/children-youth.md",
+        "references/disability-services.md",
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "eeoc-phone",
+      "claim": "EEOC general number (charges and inquiries)",
+      "value": "1-800-669-4000",
+      "source": "https://www.eeoc.gov/contact-eeoc",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/know-your-rights.md"
+      ]
+    },
+    {
+      "id": "osha-phone",
+      "claim": "OSHA toll-free number (complaints, unsafe conditions)",
+      "value": "1-800-321-6742",
+      "source": "https://www.osha.gov/contactus",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/know-your-rights.md"
+      ]
+    },
+    {
+      "id": "dol-whd-phone",
+      "claim": "DOL Wage and Hour Division help line (1-866-4-USWAGE)",
+      "value": "1-866-487-9243",
+      "source": "https://www.dol.gov/agencies/whd/contact",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/know-your-rights.md"
+      ]
+    },
+    {
+      "id": "fsaic-phone",
+      "claim": "Federal Student Aid Information Center (1-800-4-FED-AID)",
+      "value": "1-800-433-3243",
+      "source": "https://fsapartners.ed.gov/help-center/fsa-customer-service-center/service-centers-for-students/federal-student-aid-information-center-fsaic",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/students-education.md"
+      ]
+    },
+    {
+      "id": "mo-first-steps-phone",
+      "claim": "Missouri First Steps statewide referral line (SPOE, ext. 3)",
+      "value": "1-866-583-2392",
+      "source": "https://dese.mo.gov/childhood/early-intervention/first-steps/how-to-make-referral",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/children-youth.md",
+        "references/disability-services.md",
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "mo-fsd-phone",
+      "claim": "Missouri Family Support Division",
+      "value": "1-855-373-4636",
+      "source": "https://dss.mo.gov/contactdss",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "mo-healthnet-apply-phone",
+      "claim": "Apply for MO HealthNet by phone",
+      "value": "855-373-9994",
+      "source": "https://dss.mo.gov/healthcare/apply",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/client-checklists.md",
+        "references/know-your-rights.md",
+        "references/mental-health.md",
+        "references/mo-resources.md"
+      ]
+    },
+    {
+      "id": "mo-ui-claims-phone",
+      "claim": "Missouri unemployment claims line and UInteract filing site",
+      "value": "800-320-2519",
+      "match": [
+        "800-320-2519",
+        "uinteract.labor.mo.gov"
+      ],
+      "source": "https://labor.mo.gov/faqs/knowledge-base/when-and-how-do-i-file-unemployment-claim",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/client-checklists.md"
+      ]
+    },
+    {
+      "id": "mo-tobacco-quitline",
+      "claim": "Missouri Tobacco Quitline, 1-800-QUIT-NOW (keypad 784-8669), 24/7",
+      "value": "1-800-784-8669",
+      "source": "https://dss.mo.gov/mhd/participants/pages/quitsmoke.htm",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/mo-resources.md",
+        "references/public-health.md"
+      ]
+    },
+    {
+      "id": "medicare-part-b-premium-2026",
+      "claim": "2026 Medicare Part B standard monthly premium",
+      "value": "$202.90",
+      "source": "https://www.cms.gov/newsroom/fact-sheets/2026-medicare-parts-b-premiums-deductibles",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/aging-services.md"
+      ]
+    },
+    {
+      "id": "ssi-fbr-2026",
+      "claim": "2026 SSI federal payment standard, individual",
+      "value": "$994/month",
+      "source": "https://www.ssa.gov/news/en/cola/factsheets/2026.html",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/disability-services.md"
+      ]
+    },
+    {
+      "id": "sga-2026",
+      "claim": "2026 SGA: $1,690/month non-blind, $2,830 blind",
+      "value": "$1,690/month non-blind; $2,830 blind",
+      "source": "https://www.ssa.gov/news/en/cola/factsheets/2026.html",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/disability-services.md"
+      ]
+    },
+    {
+      "id": "ssi-student-exclusion-2026",
+      "claim": "2026 SSI student exclusion: $2,410/month, $9,730/year",
+      "value": "$2,410/month (max $9,730/year, 2026)",
+      "source": "https://www.ssa.gov/news/en/cola/factsheets/2026.html",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/disability-services.md"
+      ]
+    },
+    {
+      "id": "fpl-2026-household-1",
+      "claim": "2026 HHS poverty guideline, household of 1 (48 states + DC)",
+      "value": "| 1 | $15,960 |",
+      "source": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-15",
+      "files": [
+        "references/output-formats.md"
+      ]
+    },
+    {
+      "id": "fpl-2026-household-4",
+      "claim": "2026 HHS poverty guideline, household of 4 (48 states + DC)",
+      "value": "| 4 | $33,000 |",
+      "source": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-15",
+      "files": [
+        "references/output-formats.md"
+      ]
+    },
+    {
+      "id": "fpl-2026-per-person",
+      "claim": "2026 HHS poverty guidelines: add $5,680 per person beyond 8",
+      "value": "Add $5,680 per person beyond 8",
+      "source": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-15",
+      "files": [
+        "references/output-formats.md"
+      ]
+    },
+    {
+      "id": "able-contribution-limit-2026",
+      "claim": "2026 ABLE annual contribution limit",
+      "value": "$20,000/year",
+      "source": "https://ncable.nc.gov/benefits/able-work",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/disability-services.md",
+        "references/financial-capability.md"
+      ]
+    },
+    {
+      "id": "eitc-max-3-children",
+      "claim": "EITC maximum, 3+ qualifying children (tax year 2025)",
+      "value": "Up to $8,046 (3+ qualifying children)",
+      "source": "https://irs.gov/credits-deductions/individuals/earned-income-tax-credit/earned-income-and-earned-income-tax-credit-eitc-tables",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/financial-capability.md"
+      ]
+    },
+    {
+      "id": "ctc-max-per-child",
+      "claim": "Child Tax Credit up to $2,200 per qualifying child under 17 (tax year 2025)",
+      "value": "Up to $2,200 per qualifying child",
+      "source": "https://www.irs.gov/credits-deductions/individuals/child-tax-credit",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/financial-capability.md"
+      ]
+    },
+    {
+      "id": "vita-income-guideline",
+      "claim": "VITA: generally income about $70,244 or less; sites may set their own limit",
+      "value": "about $70,244 or less",
+      "source": "https://www.irs.gov/individuals/free-tax-return-preparation-for-you-by-volunteers",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/financial-capability.md"
+      ]
+    }
+  ]
+}
