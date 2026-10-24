@@ -108,6 +108,17 @@
       ]
     },
     {
+      "id": "deaf-hotline-videophone",
+      "claim": "Deaf/hard of hearing route listed by the National Domestic Violence Hotline: The Deaf Hotline video phone",
+      "value": "855-812-1001",
+      "source": "https://www.thehotline.org/",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/public-safety.md"
+      ]
+    },
+    {
       "id": "childhelp-hotline",
       "claim": "Childhelp National Child Abuse Hotline, call or text, 24/7",
       "value": "1-800-422-4453",
@@ -568,6 +579,17 @@
       "claim": "VITA: generally income about $70,244 or less; sites may set their own limit",
       "value": "about $70,244 or less",
       "source": "https://www.irs.gov/individuals/free-tax-return-preparation-for-you-by-volunteers",
+      "verified_on": "2026-10-24",
+      "recheck_on": "2027-01-01",
+      "files": [
+        "references/financial-capability.md"
+      ]
+    },
+    {
+      "id": "irs-free-file-agi-limit",
+      "claim": "IRS Free File guided tax software: AGI of $95,000 or less (irs.gov names no tax year; Free File reopens January 2027)",
+      "value": "AGI of $95,000 or less",
+      "source": "https://www.irs.gov/filing/irs-free-file-do-your-taxes-for-free",
       "verified_on": "2026-10-24",
       "recheck_on": "2027-01-01",
       "files": [
