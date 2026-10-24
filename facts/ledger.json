@@ -453,6 +453,17 @@
       ]
     },
     {
+      "id": "bhr-local-crisis-line",
+      "claim": "Behavioral Health Response (BHR), St. Louis region: local 24/7 crisis line 314-819-8811",
+      "value": "314-819-8811",
+      "source": "https://bhrstl.org/contact",
+      "verified_on": "2026-10-24",
+      "recheck_days": 180,
+      "files": [
+        "references/mo-resources.md"
+      ]
+    },
+    {
       "id": "medicare-part-b-premium-2026",
       "claim": "2026 Medicare Part B standard monthly premium",
       "value": "$202.90",
